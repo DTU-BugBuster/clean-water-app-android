@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+jar {
+  manifest {
+     attributes  'Implementation-Title' : 'spatel397 gradle',
+                 'Implementation-Version' : version,
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain.java'
+    }
+}
+
+dependencies {
+    compile files('libs/resources.jar')
+	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
