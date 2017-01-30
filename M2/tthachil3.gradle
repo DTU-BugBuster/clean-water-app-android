@@ -1,16 +1,16 @@
+defaultTasks 'jar'
+
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+
+dependencies {
+    compile files('lib/resources.jar')
+}
 
 
 jar {
   manifest {
-     attributes  'Implementation-Title' : 'tthachil3 gradle' ,
-                 'Implementation-Version' : '1.0',
-                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain.java'
+     attributes  'Class-Path' : '../../lib/resources.jar',
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
     }
-}
-
-dependencies {
-    compile files('libs/resources.jar')
-	testCompile group: 'junit', name: 'junit', version: '4.+'
 }
