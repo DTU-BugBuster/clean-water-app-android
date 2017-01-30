@@ -1,16 +1,15 @@
+defaultTasks 'jar'
+
 apply plugin: 'java'
-
-defaultTasks   'jar'
-
-jar {
-  manifest {
-     attributes  'Implementation-Title' : 'spatel397 gradle',
-                 'Implementation-Version' : '1.0',
-                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
-    }
-}
 
 dependencies {
     compile files('lib/resources.jar')
-	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+
+jar {
+  manifest {
+     attributes  'Class-Path' : '../../lib/resources.jar',
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
+    }
 }
