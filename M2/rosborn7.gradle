@@ -1,14 +1,20 @@
-apply plugin : 'java'
+//Set a default task, so if you don't provide any, these will be executed.
+defaultTasks   'jar'
+
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+
 jar {
   manifest {
      attributes  'Implementation-Title' : 'rosborn7 gradle' ,
-                 'Implementation-Version' : version,
-                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain.java' 
+                 'Implementation-Version' : '1.0',
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
     }
 }
 
 dependencies {
-    compile files('libs/resources.jar')
-	testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile files('lib/resources.jar')
+    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
-Shivam Patel
