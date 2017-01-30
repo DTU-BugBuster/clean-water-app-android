@@ -1,5 +1,5 @@
 //Set a default task, so if you don't provide any, these will be executed.
-defaultTasks   'build'
+defaultTasks   'jar'
 
 
 // Apply the java plugin to add support for Java
