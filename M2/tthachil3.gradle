@@ -5,7 +5,7 @@ apply plugin: 'java'
 jar {
   manifest {
      attributes  'Implementation-Title' : 'tthachil3 gradle' ,
-                 'Implementation-Version' : version,
+                 'Implementation-Version' : '1.0',
                  'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain.java'
     }
 }
