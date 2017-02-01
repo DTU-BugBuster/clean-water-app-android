@@ -1,13 +1,20 @@
+//Thomas Thachil
+//thachil@gatech.edu
+//tthachil3
+
+
+//need the gradle file to create the jar file
 defaultTasks 'jar'
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 
+//depends on resources.jar to execute
 dependencies {
     compile files('lib/resources.jar')
 }
 
-
+//sets location of involved files to create jar
 jar {
   manifest {
      attributes  'Class-Path' : '../../lib/resources.jar',
