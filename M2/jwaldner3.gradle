@@ -1,13 +1,15 @@
+//jwaldner3
 defaultTasks 'jar'
 
-// Apply the java plugin to add support for Java
-
+// this enables java support
 apply plugin: 'java'
 
+//compiles the jar files for gradle to build
 dependencies {
     compile files('lib/resources.jar')
 }
 
+//sets the path for the jar
 jar {
   manifest {
      attributes  'Class-Path' : '../../lib/resources.jar',
