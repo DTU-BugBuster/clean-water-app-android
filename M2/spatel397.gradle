@@ -1,12 +1,19 @@
+//Shivam Patel
+//Shivamp629@gatech.edu
+//Spatel397
+
+
+//Set a default task, so if you don't provide any, these will be executed.
 defaultTasks 'jar'
 
+// Apply the java plugin to add support for Java
 apply plugin: 'java'
 
 dependencies {
     compile files('lib/resources.jar')
 }
 
-
+//Define the contents of the jar file
 jar {
   manifest {
      attributes  'Class-Path' : '../../lib/resources.jar',
