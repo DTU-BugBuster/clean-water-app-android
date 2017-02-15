@@ -4,6 +4,7 @@
     <!-- Strings related to login -->
     <string name="action_register">Register</string>
     <string name="action_sign_in">Sign in</string>
+    <string name="action_logout">Logout</string>
     <string name="action_login">Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
