@@ -93,6 +93,14 @@ public class LoginActivity extends AppCompatActivity {
         String storedPassword= loginDataBaseAdapter.getSingleEntry(email);
         if(password.equals(storedPassword)) {
             Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
+            AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.email);
+            EditText textView2 = (EditText) findViewById(R.id.password);
+            String getrec = textView.getText().toString();
+            String getrec2 = textView2.getText().toString();
+            Bundle bundle = new Bundle();
+            bundle.putString("stuff", getrec);
+            bundle.putString("stuff2", getrec2);
+            i.putExtras(bundle);
             startActivity(i);
         }
     }

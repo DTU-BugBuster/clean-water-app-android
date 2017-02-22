@@ -86,6 +86,14 @@ public class LoginDataBaseAdapter
         return password;
     }
 
+    public int getSingleEntry2(String email) {
+        Cursor cursor=db.query("LOGIN", null, " EMAIL=?", new String[]{email}, null, null, null);
+        cursor.moveToFirst();
+        int type = cursor.getInt(cursor.getColumnIndex("TYPE"));
+        cursor.close();
+        return type;
+    }
+
     public void  updateEntry(String email,String password, int type) {
         ContentValues updatedValues = new ContentValues();
         updatedValues.put("EMAIL", email);
