@@ -85,6 +85,10 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
     }
 
+    /**
+     * method to add a user in register page
+     * @return boolean than indicates whether or not user was added
+     */
     public boolean addUser() {
         String insertEmail = email.getText().toString();
         String insertPassword = password.getText().toString();
@@ -100,7 +104,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
-     */
+    */
     private void setupSpinner() {
 
         /* Setup spinners and adapter */

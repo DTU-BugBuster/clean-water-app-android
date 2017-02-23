@@ -76,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * method to attempt a login by getting email and password
+     */
     private void attemptLogin() {
         // Reset errors.
         mEmailView.setError(null);

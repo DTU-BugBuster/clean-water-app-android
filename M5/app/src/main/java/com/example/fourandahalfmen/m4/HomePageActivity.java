@@ -88,6 +88,8 @@ public class HomePageActivity extends Activity implements OnClickListener {
 
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
+     *
+     * @param stuff info from login page to user page sent from bundle
      */
     private void setupSpinner(String stuff) {
 
