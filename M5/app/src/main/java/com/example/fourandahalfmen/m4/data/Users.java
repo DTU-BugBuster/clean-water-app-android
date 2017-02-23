@@ -21,10 +21,10 @@ public final class Users {
         /**
          * Possible values for the type of user.
          */
-        public static final int TYPE_USER = 0;
-        public static final int TYPE_WORKER = 1;
-        public static final int TYPE_MANAGER = 2;
-        public static final int TYPE_ADMIN = 3;
+        public static final String TYPE_USER = "User";
+        public static final String TYPE_WORKER = "Worker";
+        public static final String TYPE_MANAGER = "Manager";
+        public static final String TYPE_ADMIN = "Admin";
     }
 
 }

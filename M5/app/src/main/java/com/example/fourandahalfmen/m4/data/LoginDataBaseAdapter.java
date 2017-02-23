@@ -28,7 +28,7 @@ public class LoginDataBaseAdapter
     public static final int NAME_COLUMN = 1;
     // SQL Statement to create a new database.
     static final String DATABASE_CREATE = "create table "+"LOGIN"+
-            "( " +"EMAIL  text,PASSWORD text, TYPE int); ";
+            "( " +"EMAIL  text,PASSWORD text, TYPE text); ";
 
     // Variable to hold the database instance
     public  SQLiteDatabase db;
@@ -55,7 +55,7 @@ public class LoginDataBaseAdapter
         return db;
     }
 
-    public void insertEntry(String email,String password, int type) {
+    public void insertEntry(String email,String password, String type) {
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("EMAIL", email);
@@ -86,21 +86,20 @@ public class LoginDataBaseAdapter
         return password;
     }
 
-    public int getSingleEntry2(String email) {
+    public String getSingleEntry2(String email) {
         Cursor cursor=db.query("LOGIN", null, " EMAIL=?", new String[]{email}, null, null, null);
         cursor.moveToFirst();
-        int type = cursor.getInt(cursor.getColumnIndex("TYPE"));
+        String type = cursor.getString(cursor.getColumnIndex("TYPE"));
         cursor.close();
         return type;
     }
 
-    public void  updateEntry(String email,String password, int type) {
+    public void  updateEntry(String email,String password, String type) {
         ContentValues updatedValues = new ContentValues();
         updatedValues.put("EMAIL", email);
         updatedValues.put("PASSWORD",password);
         updatedValues.put("TYPE",type);
-
-        String where="EMAIL = ?";
-        db.update("LOGIN",updatedValues, where, new String[]{email});
+        String where ="EMAIL ='"+email+"'";
+        db.update("LOGIN",updatedValues, where, null);
     }
 }

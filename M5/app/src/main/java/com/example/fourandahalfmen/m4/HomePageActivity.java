@@ -13,8 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
 import com.example.fourandahalfmen.m4.data.Users;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 
 public class HomePageActivity extends Activity implements OnClickListener {
@@ -24,8 +30,13 @@ public class HomePageActivity extends Activity implements OnClickListener {
     private Spinner userSpinner;
     private boolean editing;
     private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
-    private int userType = Users.UserEntry.TYPE_USER;
+    private String userType;
     LoginDataBaseAdapter loginDataBaseAdapter;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -39,7 +50,13 @@ public class HomePageActivity extends Activity implements OnClickListener {
 
         Bundle bundle = getIntent().getExtras();
         String stuff = bundle.getString("stuff");
-
+        Button mBtn = (Button) findViewById(R.id.Save);
+        mBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAddPressed(v);
+            }
+        });
         Button mBtn2 = (Button) findViewById(R.id.logout_button);
         mBtn2.setOnClickListener(this);
 
@@ -47,14 +64,13 @@ public class HomePageActivity extends Activity implements OnClickListener {
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
         passwordField = (EditText) findViewById(R.id.editText);
 
-        int storedPassword = loginDataBaseAdapter.getSingleEntry2(stuff);
-        editing = true;
+        String storedPassword = loginDataBaseAdapter.getSingleEntry(stuff);
+        userType = loginDataBaseAdapter.getSingleEntry2(stuff);
+        passwordField.setText(storedPassword, TextView.BufferType.EDITABLE);
+        emailField.setText(stuff, TextView.BufferType.EDITABLE);
+        setupSpinner(stuff);
+        userType = loginDataBaseAdapter.getSingleEntry2(stuff);
 
-        //emailField.setText(stuff);
-        //passwordField.setText(loginDataBaseAdapter.getSingleEntry(stuff));
-
-        //setupSpinner();
-        //userSpinner.setSelection(storedPassword);
     }
 
     /**
@@ -65,7 +81,7 @@ public class HomePageActivity extends Activity implements OnClickListener {
     protected void onAddPressed(View view) {
         String email1 = emailField.getText().toString();
         String password1 = passwordField.getText().toString();
-        int userType = (int) userSpinner.getSelectedItem();
+        String userType = (String) userSpinner.getSelectedItem();
         loginDataBaseAdapter.updateEntry(email1, password1, userType);
         finish();
     }
@@ -73,13 +89,15 @@ public class HomePageActivity extends Activity implements OnClickListener {
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
      */
-    private void setupSpinner() {
+    private void setupSpinner(String stuff) {
 
         /* Setup spinners and adapter */
-        ArrayAdapter<String> userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
+        ArrayAdapter userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(userAdapter);
-
+        userType = loginDataBaseAdapter.getSingleEntry2(stuff);
+        int spinnerPosition = userAdapter.getPosition(userType);
+        userSpinner.setSelection(spinnerPosition);
         // Set the integer mSelected to the constant values
         userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -98,6 +116,7 @@ public class HomePageActivity extends Activity implements OnClickListener {
                 }
             }
 
+
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -112,8 +131,6 @@ public class HomePageActivity extends Activity implements OnClickListener {
         Intent i = new Intent(HomePageActivity.this, WelcomeActivity.class);
         startActivity(i);
     }
-
-
 }
 
 

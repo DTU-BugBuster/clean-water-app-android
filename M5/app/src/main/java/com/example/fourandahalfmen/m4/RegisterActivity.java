@@ -1,5 +1,4 @@
 package com.example.fourandahalfmen.m4;
-import com.example.fourandahalfmen.m4.data.DbHelper;
 import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
 import com.example.fourandahalfmen.m4.data.Users.UserEntry;
 import com.google.android.gms.appindexing.Action;
@@ -9,10 +8,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,7 +30,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
     private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
     private EditText email;
     private EditText password;
-    private int userType = UserEntry.TYPE_USER;
+    private String userType = UserEntry.TYPE_USER;
     LoginDataBaseAdapter loginDataBaseAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

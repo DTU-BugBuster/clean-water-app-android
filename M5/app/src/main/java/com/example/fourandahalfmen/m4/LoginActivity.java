@@ -1,12 +1,8 @@
 package com.example.fourandahalfmen.m4;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,9 +11,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.example.fourandahalfmen.m4.data.DbHelper;
+
 import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
-import com.example.fourandahalfmen.m4.data.Users;
 
 
 /**
@@ -28,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button mEmailSignInButton, mCancel;
-    LoginDataBaseAdapter loginDataBaseAdapter;
+    private LoginDataBaseAdapter loginDataBaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
