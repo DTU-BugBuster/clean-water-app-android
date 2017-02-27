@@ -1,10 +1,12 @@
 package com.example.fourandahalfmen.m4;
 import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
-import com.example.fourandahalfmen.m4.data.Users.UserEntry;
+import com.example.fourandahalfmen.m4.data.Users;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,13 +32,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
     private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
     private EditText email;
     private EditText password;
-    private String userType = UserEntry.TYPE_USER;
+//    private String userType = UserEntry.TYPE_USER;
     LoginDataBaseAdapter loginDataBaseAdapter;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabase = database.getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +101,35 @@ public class RegisterActivity extends Activity implements OnClickListener {
         if (insertEmail == null || insertPassword == null) {
             return false;
         } else {
-            loginDataBaseAdapter.insertEntry(insertEmail, insertPassword, userType);
+
+            writeNewUser(username, password, account_type, email, house_num, street_address, city, state, zip_code);
+
+            mDatabase.child("users").child(insertEmail).setValue(user);
+
+//            loginDataBaseAdapter.insertEntry(insertEmail, insertPassword, userType);
         }
         return true;
     }
 
+    private void writeNewUser(String username, String password, String account_type,
+                              String email, int house_num, String street_address, String city,
+                              String state, String zip_code) {
+
+        Users user = new Users(username, password, account_type, email, house_num,
+                street_address, city, state, zip_code);
+
+        mDatabase.child("users").child(username).setValue(user);
+    }
+
+    private void updateUser(String username, String password, String account_type,
+                            String email, int house_num, String street_address, String city,
+                            String state, String zip_code) {
+
+        Users user = new Users(username, password, account_type, email, house_num,
+                street_address, city, state, zip_code);
+
+        mDatabase.child("users").child(username).setValue(user);
+    }
 
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
