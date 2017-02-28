@@ -1,45 +1,43 @@
-# M5 Register/Profile and the Domain Model
+# M6 User Water Report, Robustness Diagrams, Architecture and UI Prototypes
 ## Design
-Brainstorm candidate classes/objects for the domain model. Filter those to get rid of inappropriate objects. Create the Domain Model for the application. Use the project description to brainstorm objects. List primary attributes. Note the stereotype of the classes. Annotate relationships between objects (which objects need to use other objects). Show any multiplicity requirements. There is only one domain model required, so this is a team effort.
+Each person will take their individual detailed user story from M4, and create a robustness/analysis diagram from it. (again, you do not have to cover for a team mate, just do your own). The diagram should show interaction between the system and your actors using the 4 symbols we discussed in class (boundary, control, etity, external actor). An example diagram is here: external link: http://www.math-cs.gordon.edu/courses/cs211/ATMExample/AnalysisClasses.html
 
-## Coding
-Add the registration screen to your app. A new user should be able to register by entering their information (like name, id, and password). If accepted, the new user should be added to the system. If cancelled, the user should not be added.
+The team should create an architecture diagram that displays the chosen software architecture of the system. Be sure and annotate your trust boundaries on the diagram.
 
-During registration, the new user may designate their account type (User, Worker, Manager or Admin). In a real application, we would have controls for these, but for this class project, we will let the individual enter their capabilities during registration.
+The team should create a UI flow diagram as shown in class that plans for the navigation of the screens required for the application. Also, the team should have a prototype (sketches) of the major screens in the application. you may use an automated tool like FluidUI for this if desired.
 
-When registration is working, you may remove the hard-coded user/pass from the app.
+## Implementation
+Note: Databases are extra credit, therefore, you can assume for testing of this app all data will fit into the device memory. Since persistence is not yet required, entering users and other data can be done on each run of the application.
 
-You should also have the ability for a user to create and edit their profile. Their profile consists of all their information that the application must maintain like email address, home address, title, etc.
+In this milestone, we implement the ability to submit the user water reports. You should have some kind of input screen for the report where all the information is captured. The report should be stored somewhere in the model.
 
-NOTE THAT PERSISTENCE IS NOT REQUIRED AT THIS POINT. IT IS OK TO HAVE TO RE-ENTER USERS FROM SCRATCH EACH TIME THE APPLICATION IS STARTED.
+## Requirements
+After login, your application should display the main screen of the application.
+You should have a way to navigate to the submit report screen.
+The submit report should prompt for all required information.
+The submit report screen should not be accessible till after login.
+Canceling the report does not save any information
+Submitting the report should store it in the model.
+Need a way to view a list of all reports in the system.
+## Grading Criteria
+Robustness/Analysis Diagrams .................... 15
 
-## Grading Criteria (5)
-1. Brainstormed and Filtered Classes .... 5
+UI Flow and Prototypes .......................... 15
 
-2. UML Domain Model prepared (50)
+Architecture / Trust boundaries ................. 10
 
-    Model contains appropriate classes ...... 10
+Login/Registration/Profile still works ...... 05
 
-    Classes are annotated with appropriate stereotypes .... 10
+Can navigate to Submit report functionality ...................... 05
 
-    Model contains appropriate interactions .... 10
+Report screen enters all required information .................... 10
 
-    Model shows multiplicity of associations .... 10
+After submission report is stored in model ....................... 10
 
-    Model contains appropriate attributes … 10
+List of reports can viewed.................................10
 
-3. Implementation (45)
+Cancel does not save the report .......................... 05
 
-    User registration screen is integrated into app .............................. 05
+Report number auto-assigned by system .................... 05
 
-    Accepted registration adds new user to system ................. 05
-
-    Cancelled registration does not add new user ................. 05
-
-    Back-end records list of registered users (UI communicates with model) ................... 10
-
-    User type (user, worker, manager, admin) created ..... 10
-
-    User profile edited ...... 05
-
-    Javadoc / comments .......................................... 05
+Javadoc, Comments and Design Update / discussion with TA ........................................10
