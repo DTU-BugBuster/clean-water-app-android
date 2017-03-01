@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -20,94 +23,110 @@ import com.example.fourandahalfmen.m4.data.LoginDataBaseAdapter;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private Button mEmailSignInButton, mCancel;
-    private LoginDataBaseAdapter loginDataBaseAdapter;
+//    private AutoCompleteTextView mEmailView;
+//    private EditText mPasswordView;
+//    private Button mEmailSignInButton, mCancel;
+//    private LoginDataBaseAdapter loginDataBaseAdapter;
+
+    /* instance variables */
+    private EditText username;
+    private EditText password;
+
+    /* database instance */
+    private GoogleApiClient client;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference userDatabase = database.getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
 
-        loginDataBaseAdapter=new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter=loginDataBaseAdapter.open();
+//        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+//                    attemptLogin();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
-        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mCancel = (Button) findViewById(R.id.cancel_button);
-
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-        mCancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancel();
-            }
-        });
+//        loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+//        loginDataBaseAdapter=loginDataBaseAdapter.open();
+//
+//        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+//        mCancel = (Button) findViewById(R.id.cancel_button);
+//
+//        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
+//            }
+//        });
+//        mCancel.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                cancel();
+//            }
+//        });
     }
 
+    /**
+     * If cancel button is clicked, goes back to welcome screen.
+     */
+    public void onLoginClick(View v) {
+        attemptLogin();
+    }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * If cancel button is clicked, goes back to welcome screen.
      */
-    private void cancel() {
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+    public void onCancelClick(View v) {
+//        mEmailView.setError(null);
+//        mPasswordView.setError(null);
         Intent i = new Intent(LoginActivity.this, WelcomeActivity.class);
         startActivity(i);
     }
 
     /**
-     * method to attempt a login by getting email and password
+     * method to attempt a login by getting username and password
      */
     private void attemptLogin() {
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-        boolean cancel = false;
+//        // Reset errors.
+//        mEmailView.setError(null);
+//        mPasswordView.setError(null);
+//        boolean cancel = false;
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        String storedPassword= loginDataBaseAdapter.getSingleEntry(email);
-        if(password.equals(storedPassword)) {
+        String insertUsername = username.getText().toString();
+        String insertPassword = password.getText().toString();
+        String storedPassword = userDatabase.child(insertUsername).child("password");
+//        String storedPassword= loginDataBaseAdapter.getSingleEntry(email);
+        if(insertPassword.equals(storedPassword)) {
             Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
-            AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.email);
-            EditText textView2 = (EditText) findViewById(R.id.password);
-            String getrec = textView.getText().toString();
-            String getrec2 = textView2.getText().toString();
-            Bundle bundle = new Bundle();
-            bundle.putString("stuff", getrec);
-            bundle.putString("stuff2", getrec2);
-            i.putExtras(bundle);
+            i.putExtra("username", insertUsername);
+//            AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.email);
+//            EditText textView2 = (EditText) findViewById(R.id.password);
+//            String getrec = textView.getText().toString();
+//            String getrec2 = textView2.getText().toString();
+//            Bundle bundle = new Bundle();
+//            bundle.putString("stuff", getrec);
+//            bundle.putString("stuff2", getrec2);
+//            i.putExtras(bundle);
             startActivity(i);
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close The Database
-        loginDataBaseAdapter.close();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+////        // Close The Database
+////        loginDataBaseAdapter.close();
+//    }
 }
 

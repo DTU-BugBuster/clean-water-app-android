@@ -74,12 +74,12 @@ public class RegisterActivity extends Activity implements OnClickListener {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    @Override
+
     public void onCreateClick(View v) {
         if (addUser()) {
             Log.i("clicks", "Create button clicked - go to HomePageActivity page");
             Intent i = new Intent(RegisterActivity.this, HomePageActivity.class);
-            i.putExtra("userName", username.getText().toString());
+            i.putExtra("username", username.getText().toString());
             startActivity(i);
         } else {
             // Fields are empty, display an error.
@@ -117,7 +117,15 @@ public class RegisterActivity extends Activity implements OnClickListener {
             return false;
         }
         //writeNewUser(username, password, account_type, email, house_num, street_address, city, state, zip_code);
-        mDatabase.child("users").child(insertEmail).setValue(user);
+//        mDatabase.child("users").child(insertEmail).setValue(user);
+        mDatabase.child(insertUsername).child("password").setValue(insertPassword);
+        mDatabase.child(insertUsername).child("account_type").setValue(insertUserType);
+        mDatabase.child(insertUsername).child("email").setValue(insertEmail);
+        mDatabase.child(insertUsername).child("street_address").setValue(insertStreetAddress);
+        mDatabase.child(insertUsername).child("house_nu ").setValue(insertHouseNum);
+        mDatabase.child(insertUsername).child("city").setValue(insertCity);
+        mDatabase.child(insertUsername).child("state").setValue(insertState);
+        mDatabase.child(insertUsername).child("zip_code").setValue(insertZipCode);
         return true;
     }
 

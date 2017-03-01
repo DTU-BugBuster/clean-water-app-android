@@ -10,62 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.fourandahalfmen.m4.SubmitWaterReport">
 
-    <TextView
-        android:text="Water Condition"
-        android:layout_width="match_parent"
-        android:id="@+id/textView"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="152dp" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-
-        <TextView
-            android:text="Water Type"
-            android:layout_width="match_parent"
-            android:id="@+id/textView2"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/location"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="27dp" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/waterTypeSpinner"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cancelButton"
-            android:layout_alignBaseline="@+id/submitButton"
-            android:layout_alignBottom="@+id/submitButton"
-            android:layout_toRightOf="@+id/submitButton"
-            android:layout_toEndOf="@+id/submitButton"
-            android:layout_marginLeft="42dp"
-            android:layout_marginStart="42dp"
-            android:onClick="onCancelClick (SubmitWaterReport)" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/waterConditionSpinner"
-            android:layout_below="@+id/waterTypeSpinner"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="41dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -79,18 +29,69 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <TextView
+            android:text="Water Type"
+            android:layout_width="match_parent"
+            android:id="@+id/waterType"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="27dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/waterTypeSpinner"
+            android:layout_below="@+id/waterType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="11dp" />
+
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancelButton"
+            android:onClick="onCancelClick (SubmitWaterReport)"
+            android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_alignBaseline="@+id/submitButton"
+            android:layout_alignBottom="@+id/submitButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="Water Condition"
+            android:layout_width="match_parent"
+            android:id="@+id/waterCondition"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:layout_below="@+id/waterTypeSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/waterConditionSpinner"
+            android:layout_below="@+id/waterCondition"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="11dp" />
+
         <Button
             android:text="Submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="52dp"
-            android:layout_marginStart="52dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:id="@+id/submitButton"
+            android:onClick="onSubmitClick (SubmitWaterReport)"
+            android:layout_marginTop="41dp"
             android:layout_below="@+id/waterConditionSpinner"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="47dp"
-            android:onClick="onSubmitClick (SubmitWaterReport)" />
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

@@ -34,15 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <AutoCompleteTextView
-                    android:id="@+id/email"
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
+                    android:inputType="textPersonName"
+                    android:text="Username"
+                    android:ems="10"
+                    android:id="@+id/username"
+                    android:layout_weight="1" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -70,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="onLoginClick (LoginActivity)" />
 
             <Button
                 android:id="@+id/cancel_button"
@@ -79,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Cancel"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="onCancelClick (LoginActivity)" />
 
         </LinearLayout>
     </ScrollView>
