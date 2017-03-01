@@ -45,8 +45,8 @@ public class HomePageActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_homepage);
 
         //Db
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
+//        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+//        loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         Bundle bundle = getIntent().getExtras();
         String stuff = bundle.getString("stuff");
@@ -63,7 +63,7 @@ public class HomePageActivity extends Activity implements OnClickListener {
         submitARep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomePageActivity.this, WaterReportInputActivity.class);
+                Intent i = new Intent(HomePageActivity.this, SubmitWaterReport.class);
                 HomePageActivity.this.startActivity(i);
             }
         });

@@ -27,19 +27,18 @@ import android.widget.Spinner;
 
 public class RegisterActivity extends Activity implements OnClickListener {
 
-
     private Spinner userSpinner;
     private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
     private EditText email;
     private EditText password;
 //    private String userType = UserEntry.TYPE_USER;
-    LoginDataBaseAdapter loginDataBaseAdapter;
+//    LoginDataBaseAdapter loginDataBaseAdapter;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabase = database.getReference("users");
 
@@ -51,15 +50,14 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
         email = (EditText) findViewById(R.id.editEmail);
         password = (EditText) findViewById(R.id.editPassword);
-
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
         setupSpinner();
 
         Button mBtn1 = (Button) findViewById(R.id.createUser);
 
-        //Db
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        //Db - old stuff for SQLite
+//        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+//        loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -83,7 +81,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
             dlgAlert.setPositiveButton("Ok",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     });
         }
@@ -101,9 +98,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         if (insertEmail == null || insertPassword == null) {
             return false;
         } else {
-
             writeNewUser(username, password, account_type, email, house_num, street_address, city, state, zip_code);
-
             mDatabase.child("users").child(insertEmail).setValue(user);
 
 //            loginDataBaseAdapter.insertEntry(insertEmail, insertPassword, userType);
@@ -117,7 +112,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
         Users user = new Users(username, password, account_type, email, house_num,
                 street_address, city, state, zip_code);
-
         mDatabase.child("users").child(username).setValue(user);
     }
 
@@ -135,36 +129,34 @@ public class RegisterActivity extends Activity implements OnClickListener {
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
     */
     private void setupSpinner() {
-
         /* Setup spinners and adapter */
         ArrayAdapter<String> userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(userAdapter);
-
-        // Set the integer mSelected to the constant values
-        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(getString(R.string.user))) {
-                        userType = UserEntry.TYPE_USER;
-                    } else if (selection.equals(getString(R.string.worker))) {
-                        userType = UserEntry.TYPE_WORKER;
-                    } else if (selection.equals(getString(R.string.manager))) {
-                        userType = UserEntry.TYPE_MANAGER;
-                    } else {
-                        userType = UserEntry.TYPE_MANAGER;
-                    }
-                }
-            }
-
-            // Because AdapterView is an abstract class, onNothingSelected must be defined
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                userType = UserEntry.TYPE_USER;
-            }
-        });
+//        // Set the integer mSelected to the constant values
+//        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selection = (String) parent.getItemAtPosition(position);
+//                if (!TextUtils.isEmpty(selection)) {
+//                    if (selection.equals(getString(R.string.user))) {
+//                        userType = UserEntry.TYPE_USER;
+//                    } else if (selection.equals(getString(R.string.worker))) {
+//                        userType = UserEntry.TYPE_WORKER;
+//                    } else if (selection.equals(getString(R.string.manager))) {
+//                        userType = UserEntry.TYPE_MANAGER;
+//                    } else {
+//                        userType = UserEntry.TYPE_MANAGER;
+//                    }
+//                }
+//            }
+//
+//            // Because AdapterView is an abstract class, onNothingSelected must be defined
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                userType = UserEntry.TYPE_USER;
+//            }
+//        });
     }
 
     /**
