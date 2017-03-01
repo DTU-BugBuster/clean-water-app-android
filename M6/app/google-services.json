@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "215950606402",
+    "firebase_url": "https://clean-water-app-7ad01.firebaseio.com",
+    "project_id": "clean-water-app-7ad01",
+    "storage_bucket": "clean-water-app-7ad01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215950606402:android:909f1d5bfb43302c",
+        "android_client_info": {
+          "package_name": "com.example.fourandahalfmen.m4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215950606402-32d4kmgdqr1bdhlm6r4oeqlki1q9ucin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpCwDAw0esHSCI3IaT5QmFmOmI2BBL3Jc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

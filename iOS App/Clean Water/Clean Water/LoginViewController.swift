@@ -10,14 +10,17 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var usernameTextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    
+    @IBOutlet var emailView: UIView!
+    @IBOutlet var passwordView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameTextField.delegate = self
+        emailTextField.delegate = self
         passwordTextField.delegate = self
-        usernameTextField.becomeFirstResponder()
+        emailTextField.becomeFirstResponder()
 
 
         // Do any additional setup after loading the view.
@@ -29,20 +32,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancel(_ sender: Any) {
-        usernameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Try to find next responder
-        if textField == usernameTextField {
+        if textField == emailTextField {
+            emailTextField.resignFirstResponder()
             passwordTextField.becomeFirstResponder()
-            usernameTextField.resignFirstResponder()
+            
+            emailView.backgroundColor = .gray
+            passwordView.backgroundColor = .gray
+            
         } else {
             passwordTextField.resignFirstResponder()
             
-            if (usernameTextField.text == "admin" && passwordTextField.text == "password") {
+            emailView.tintColor = UIColor(colorLiteralRed: 209, green: 209, blue: 209, alpha: 1)
+            passwordView.tintColor = UIColor(colorLiteralRed: 209, green: 209, blue: 209, alpha: 1)
+            
+            if (emailTextField.text == "admin" && passwordTextField.text == "password") {
                 self.performSegue(withIdentifier: "goToHome", sender: self)
+            } else {
+                emailView.backgroundColor = .red
+                passwordView.backgroundColor = .red
             }
         }
         // Do not add a line break
