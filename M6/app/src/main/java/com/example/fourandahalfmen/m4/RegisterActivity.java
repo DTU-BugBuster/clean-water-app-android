@@ -27,20 +27,28 @@ import android.widget.Spinner;
 
 public class RegisterActivity extends Activity implements OnClickListener {
 
-    private Spinner userSpinner;
-    private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
-    private EditText email;
+    /* instance variables */
+    private EditText username;
     private EditText password;
-//    private String userType = UserEntry.TYPE_USER;
-//    LoginDataBaseAdapter loginDataBaseAdapter;
+    private Spinner userSpinner;
+    private EditText email;
+    public EditText house_num;
+    public EditText street_address;
+    public EditText city;
+    public EditText state;
+    public EditText zip_code;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    /* values */
+    private String[] userTypes = {"User", "Worker", "Manager", "Admin"};
+
+    /* database instance */
     private GoogleApiClient client;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabase = database.getReference("users");
+
+//    private String userType = UserEntry.TYPE_USER;
+//    LoginDataBaseAdapter loginDataBaseAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +56,18 @@ public class RegisterActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        email = (EditText) findViewById(R.id.editEmail);
+        username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.editPassword);
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
-        setupSpinner();
+        email = (EditText) findViewById(R.id.editEmail);
+        house_num = (EditText) findViewById(R.id.house_num);
+        street_address = (EditText) findViewById(R.id.street_address);
+        house_num = (EditText) findViewById(R.id.house_num);
+        city = (EditText) findViewById(R.id.city);
+        state = (EditText) findViewById(R.id.state);
+        zip_code = (EditText) findViewById(R.id.zip_code);
 
-        Button mBtn1 = (Button) findViewById(R.id.createUser);
-
-        //Db - old stuff for SQLite
-//        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-//        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        setupSpinners();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -65,16 +75,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onCreateClick(View v) {
         if (addUser()) {
-            Log.i("clicks", "You Clicked B1");
-            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+            Log.i("clicks", "Create button clicked - go to HomePageActivity page");
+            Intent i = new Intent(RegisterActivity.this, HomePageActivity.class);
+            i.putExtra("userName", username.getText().toString());
             startActivity(i);
         } else {
-            // Username or password are empty, display and an error
+            // Fields are empty, display an error.
             AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-
-            dlgAlert.setMessage("Either Email or password fields are empty");
+            dlgAlert.setMessage("Some fields are empty!");
             dlgAlert.setTitle("Error Message...");
             dlgAlert.setPositiveButton("OK", null);
             dlgAlert.create().show();
@@ -92,43 +102,48 @@ public class RegisterActivity extends Activity implements OnClickListener {
      * @return boolean than indicates whether or not user was added
      */
     public boolean addUser() {
-        String insertEmail = email.getText().toString();
+        String insertUsername = username.getText().toString();
         String insertPassword = password.getText().toString();
+        String insertUserType = userSpinner.getSelectedItem().toString();
+        String insertEmail = email.getText().toString()
+        String insertStreetAddress = street_address.getText().toString();
+        String insertHouseNum = house_num.getText().toString();
+        String insertCity = city.getText().toString();
+        String insertState = state.getText().toString();
+        String insertZipCode = (zip_code).getText().toString();
 
-        if (insertEmail == null || insertPassword == null) {
+
+        if (insertUsername == null || insertPassword == null ) {
             return false;
-        } else {
-            writeNewUser(username, password, account_type, email, house_num, street_address, city, state, zip_code);
-            mDatabase.child("users").child(insertEmail).setValue(user);
-
-//            loginDataBaseAdapter.insertEntry(insertEmail, insertPassword, userType);
         }
+        //writeNewUser(username, password, account_type, email, house_num, street_address, city, state, zip_code);
+        mDatabase.child("users").child(insertEmail).setValue(user);
         return true;
     }
 
-    private void writeNewUser(String username, String password, String account_type,
-                              String email, int house_num, String street_address, String city,
-                              String state, String zip_code) {
+//    private void writeNewUser(String username, String password, String account_type,
+//                              String email, int house_num, String street_address, String city,
+//                              String state, String zip_code) {
+//
+//        Users user = new Users(username, password, account_type, email, house_num,
+//                street_address, city, state, zip_code);
+//        mDatabase.child("users").child(username).setValue(user);
+//    }
 
-        Users user = new Users(username, password, account_type, email, house_num,
-                street_address, city, state, zip_code);
-        mDatabase.child("users").child(username).setValue(user);
-    }
-
-    private void updateUser(String username, String password, String account_type,
-                            String email, int house_num, String street_address, String city,
-                            String state, String zip_code) {
-
-        Users user = new Users(username, password, account_type, email, house_num,
-                street_address, city, state, zip_code);
-
-        mDatabase.child("users").child(username).setValue(user);
-    }
+//    private void updateUser(String username, String password, String account_type,
+//                            String email, int house_num, String street_address, String city,
+//                            String state, String zip_code) {
+//
+//        Users user = new Users(username, password, account_type, email, house_num,
+//                street_address, city, state, zip_code);
+//
+//        mDatabase.child("users").child(username).setValue(user);
+//    }
 
     /**
-     * Setup the dropdown spinner that allows the user to select the gender of the pet.
+     * Setup the dropdown spinners.
     */
-    private void setupSpinner() {
+    private void setupSpinners() {
         /* Setup spinners and adapter */
         ArrayAdapter<String> userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

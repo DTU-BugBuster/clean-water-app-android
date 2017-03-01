@@ -64,6 +64,7 @@ public class HomePageActivity extends Activity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePageActivity.this, SubmitWaterReport.class);
+                i.putExtra("userName", username.getText().toString());
                 HomePageActivity.this.startActivity(i);
             }
         });
