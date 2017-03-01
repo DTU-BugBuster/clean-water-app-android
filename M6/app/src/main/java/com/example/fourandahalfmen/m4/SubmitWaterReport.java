@@ -42,7 +42,6 @@ public class SubmitWaterReport extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reportDatabase = database.getReference("waterReports");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +52,10 @@ public class SubmitWaterReport extends AppCompatActivity {
 
     }
 
+    /**
+     * Functionality for submit button
+     * @param v view that it button is controlled on
+     */
     public void onSubmitClick(View v) {
         if (submitReport()) {
             Log.i("clicks", "You clicked the submit button.");
@@ -74,12 +77,20 @@ public class SubmitWaterReport extends AppCompatActivity {
         }
     }
 
+    /**
+     * Functionality for cancel button
+     * @param v view that button is controlled on
+     */
     public void onCancelClick(View v) {
             Log.i("clicks", "You clicked the submit button.");
             Intent i = new Intent(SubmitWaterReport.this, HomePageActivity);
             startActivity(i);
     }
 
+    /**
+     * Actual process of communicating with Firebase to submit report
+     * @return boolean determines successful submitting report
+     */
     private boolean submitReport() {
         String insertLocation = location.getText().toString();
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
