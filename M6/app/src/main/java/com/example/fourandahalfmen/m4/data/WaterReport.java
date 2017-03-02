@@ -8,17 +8,19 @@ import java.util.Date;
 public class WaterReport {
 
     String location;
+    String user;
     String waterType;
     String waterCondition;
     String date;
 
     public WaterReport() {
-        this("null", "null", "null");
+        this("null", "null", "null", "null");
         this.date = new Date().toString();
     }
 
-    public WaterReport(String location, String waterType, String waterCondition) {
+    public WaterReport(String location, String user, String waterType, String waterCondition) {
         this.location = location;
+        this.user = user;
         this.waterType = waterType;
         this.waterCondition = waterCondition;
         this.date = new Date().toString();

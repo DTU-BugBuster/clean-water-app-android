@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SubmitWaterReport extends AppCompatActivity {
 
     /* instance variables */
+    private String fromUsername;
     private Spinner waterTypeSpinner;
     private Spinner waterConditionSpinner;
     private EditText location;
@@ -37,6 +38,8 @@ public class SubmitWaterReport extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_water_report);
+
+        fromUsername = getIntent().getStringExtra("username");
 
         location = (EditText) findViewById(R.id.location);
 
@@ -79,6 +82,7 @@ public class SubmitWaterReport extends AppCompatActivity {
             public void onClick(View c) {
                 Log.i("clicks", "You clicked the submit button.");
                 Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
+                i.putExtra("username", fromUsername);
                 startActivity(i);
             }
         });
@@ -92,7 +96,7 @@ public class SubmitWaterReport extends AppCompatActivity {
      */
     private boolean submitReport(String location, String waterType, String waterCondition) {
 
-        WaterReport wr = new WaterReport(location, waterType, waterCondition);
+        WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition);
         mDatabase.child(location).setValue(wr);
         return true;
     }
