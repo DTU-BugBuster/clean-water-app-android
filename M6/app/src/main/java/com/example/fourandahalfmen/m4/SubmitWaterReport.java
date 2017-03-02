@@ -3,30 +3,18 @@ package com.example.fourandahalfmen.m4;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.DateFormat;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import com.example.fourandahalfmen.m4.data.Users;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import java.util.Date;
+
+import com.example.fourandahalfmen.m4.data.WaterReport;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SubmitWaterReport extends AppCompatActivity {
 
@@ -34,15 +22,16 @@ public class SubmitWaterReport extends AppCompatActivity {
     private Spinner waterTypeSpinner;
     private Spinner waterConditionSpinner;
     private EditText location;
+    private Button submitButton;
+    private Button cancelButton;
 
     /* values */
     private String[] waterTypes = {"Bottled", "Well", "Stream", "Lake", "Spring", "Other"};
     private String[] waterConditions = {"Waste", "Treatable-Clear", "Treatable-Muddy", "Potable"};
 
     /* database instance */
-    private GoogleApiClient client;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference reportDatabase = database.getReference("waterReports");
+    private DatabaseReference mDatabase = database.getReference("waterReports");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,84 +39,77 @@ public class SubmitWaterReport extends AppCompatActivity {
         setContentView(R.layout.activity_submit_water_report);
 
         location = (EditText) findViewById(R.id.location);
-        setupSpinners();
 
+        waterTypeSpinner = (Spinner) findViewById(R.id.waterTypeSpinner);
+        ArrayAdapter<String> waterTypeAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, waterTypes);
+        waterTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        waterTypeSpinner.setAdapter(waterTypeAdapter);
+
+        waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
+        ArrayAdapter<String> waterConditionAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, waterConditions);
+        waterConditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        waterConditionSpinner.setAdapter(waterConditionAdapter);
+
+        submitButton = (Button) findViewById(R.id.submitButton);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (location.getText().toString() == "") {
+
+                    // If Fields are empty, display an error.
+                    alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
+
+                } else {
+                    if (submitReport(location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
+                            waterConditionSpinner.getSelectedItem().toString())) {
+                        alertMessage("Succesful Entry", "Thank you for reporting.");
+                    } else {
+                        alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
+                    }
+                }
+            }
+        });
+
+        cancelButton = (Button) findViewById(R.id.cancelButtonWR);
+
+        /**
+         * If cancel button is clicked, goes back to welcome screen.
+         */
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View c) {
+                Log.i("clicks", "You clicked the submit button.");
+                Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
-    /**
-     * Functionality for submit button
-     * @param v view that it button is controlled on
-     */
-    public void onSubmitClick(View v) {
-        if (submitReport()) {
-            Log.i("clicks", "You clicked the submit button.");
-            Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
-            startActivity(i);
-        } else {
-            // fields empty so alert
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-            dlgAlert.setMessage("Fields are empty or not selected!");
-            dlgAlert.setTitle("Error Message...");
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.create().show();
-            dlgAlert.setPositiveButton("Ok",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-        }
-    }
-
-    /**
-     * Functionality for cancel button
-     * @param v view that button is controlled on
-     */
-    public void onCancelClick(View v) {
-            Log.i("clicks", "You clicked the submit button.");
-            Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
-            startActivity(i);
-    }
 
     /**
      * Actual process of communicating with Firebase to submit report
      * @return boolean determines successful submitting report
      */
-    private boolean submitReport() {
-//        String insertLocation = location.getText().toString();
-//        String currentDateTimeString = Date.getDateTimeInstance().format(new Date());
-//       // String reporterName = user;
-//        String report = reportDatabase.child("waterReports").limitToLast(1).getRef().getKey();
-//        int reportNumber = Integer.parseInt(report) + 1;
-//        String insertWaterCondition = waterConditionSpinner.getSelectedItem().toString();
-//        String insertWaterType = waterTypeSpinner.getSelectedItem().toString();
-//
-//        if (insertLocation == null | waterTypeSpinner.getSelectedItem() == null | waterConditionSpinner.getSelectedItem() == null) {
-//            return false;
-//        }
-//
-//        reportDatabase.child("waterReports").child(reportNumber).child("date_time").setValue(currentDateTimeString);
-//        reportDatabase.child("waterReports").child(reportNumber).child("location").setValue(insertLocation);
-//        reportDatabase.child("waterReports").child(reportNumber).child("water_condition").setValue(insertWaterCondition);
-//        reportDatabase.child("waterReports").child(reportNumber).child("water_type").setValue(insertWaterType);
-//
-//        //get user from other stuff
+    private boolean submitReport(String location, String waterType, String waterCondition) {
 
-
+        WaterReport wr = new WaterReport(location, waterType, waterCondition);
+        mDatabase.child(location).setValue(wr);
         return true;
     }
 
-    /**
-     * Setup the dropdown spinners that allows the user to select options.
-     */
-    private void setupSpinners() {
-        /* Setup spinners and adapter */
-        ArrayAdapter<String> waterTypeAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, waterTypes);
-        waterTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        waterTypeSpinner.setAdapter(waterTypeAdapter);
-
-        ArrayAdapter<String> waterConditionAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, waterConditions);
-        waterTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        waterConditionSpinner.setAdapter(waterConditionAdapter);
+    private void alertMessage(String title, String body) {
+        AlertDialog.Builder dialog2 = new AlertDialog.Builder(SubmitWaterReport.this);
+        dialog2.setCancelable(false);
+        dialog2.setTitle(title);
+        dialog2.setMessage(body);
+        dialog2.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog alert = dialog2.create();
+        alert.show();
     }
+
 }

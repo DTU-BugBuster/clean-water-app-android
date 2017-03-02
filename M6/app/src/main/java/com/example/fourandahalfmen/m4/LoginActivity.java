@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.fourandahalfmen.m4.data.LoginReports;
 import com.example.fourandahalfmen.m4.data.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 
 /**
  * A login screen that offers login via email/password.
@@ -30,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
     /* database instance */
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabase = database.getReference("loginReports");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                     Users post = dataSnapshot.getValue(Users.class);
                     System.out.println(post);
                     if (insertPassword.equals(post.password)) {
+                        LoginReports lr = new LoginReports(true, insertUsername);
+                        mDatabase.child(new Date().toString()).setValue(lr);
                         Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
                         i.putExtra("username", insertUsername);
                         startActivity(i);
