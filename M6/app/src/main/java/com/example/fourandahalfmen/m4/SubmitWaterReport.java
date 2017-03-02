@@ -3,6 +3,7 @@ package com.example.fourandahalfmen.m4;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.DateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.fourandahalfmen.m4.data.Users;
@@ -25,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import java.util.Date;
 
 public class SubmitWaterReport extends AppCompatActivity {
 
@@ -83,7 +85,7 @@ public class SubmitWaterReport extends AppCompatActivity {
      */
     public void onCancelClick(View v) {
             Log.i("clicks", "You clicked the submit button.");
-            Intent i = new Intent(SubmitWaterReport.this, HomePageActivity);
+            Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
             startActivity(i);
     }
 
@@ -92,24 +94,24 @@ public class SubmitWaterReport extends AppCompatActivity {
      * @return boolean determines successful submitting report
      */
     private boolean submitReport() {
-        String insertLocation = location.getText().toString();
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-       // String reporterName = user;
-        String report = reportDatabase.child("waterReports").limitToLast(1).getRef().getKey();
-        int reportNumber = Integer.parseInt(report) + 1;
-        String insertWaterCondition = waterConditionSpinner.getSelectedItem().toString();
-        String insertWaterType = waterTypeSpinner.getSelectedItem().toString();
-
-        if (insertLocation == null | waterTypeSpinner.getSelectedItem() == null | waterConditionSpinner.getSelectedItem() == null) {
-            return false;
-        }
-
-        reportDatabase.child("waterReports").child(reportNumber).child("date_time").setValue(currentDateTimeString);
-        reportDatabase.child("waterReports").child(reportNumber).child("location").setValue(insertLocation);
-        reportDatabase.child("waterReports").child(reportNumber).child("water_condition").setValue(insertWaterCondition);
-        reportDatabase.child("waterReports").child(reportNumber).child("water_type").setValue(insertWaterType);
-
-        //get user from other stuff
+//        String insertLocation = location.getText().toString();
+//        String currentDateTimeString = Date.getDateTimeInstance().format(new Date());
+//       // String reporterName = user;
+//        String report = reportDatabase.child("waterReports").limitToLast(1).getRef().getKey();
+//        int reportNumber = Integer.parseInt(report) + 1;
+//        String insertWaterCondition = waterConditionSpinner.getSelectedItem().toString();
+//        String insertWaterType = waterTypeSpinner.getSelectedItem().toString();
+//
+//        if (insertLocation == null | waterTypeSpinner.getSelectedItem() == null | waterConditionSpinner.getSelectedItem() == null) {
+//            return false;
+//        }
+//
+//        reportDatabase.child("waterReports").child(reportNumber).child("date_time").setValue(currentDateTimeString);
+//        reportDatabase.child("waterReports").child(reportNumber).child("location").setValue(insertLocation);
+//        reportDatabase.child("waterReports").child(reportNumber).child("water_condition").setValue(insertWaterCondition);
+//        reportDatabase.child("waterReports").child(reportNumber).child("water_type").setValue(insertWaterType);
+//
+//        //get user from other stuff
 
 
         return true;

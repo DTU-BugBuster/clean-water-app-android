@@ -39,7 +39,7 @@
                 android:text="@string/action_logout" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editPasswordHP"
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:hint="Password"
@@ -52,7 +52,7 @@
                 android:layout_alignParentEnd="true" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editEmailHP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -68,6 +68,49 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+            <EditText
+                android:id="@+id/editStreetHP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Street Address"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_below="@+id/userSpinner"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:id="@+id/editCityHP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_below="@+id/editStreet"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:id="@+id/editStateHP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Georgia"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_below="@+id/editCity"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:id="@+id/editZipHP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Zip-Code"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_below="@+id/editState"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" />
 
             <Button
                 android:id="@+id/Save"
@@ -80,6 +123,7 @@
                 android:layout_below="@+id/userSpinner"
                 android:layout_centerHorizontal="true"
                 android:onClick="onSaveClick (HomePageActivity)" />
+
 
             <TextView
                 android:text="Duties"
