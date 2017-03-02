@@ -1,6 +1,7 @@
 package com.example.fourandahalfmen.m4;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +26,7 @@ public class ListViewActivity extends Activity {
     ListView listView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference ref = database.getReference("waterReports");
-    private String[] values;
+//    private String[] values;
     private ArrayList<String> keyval = new ArrayList<>();
     ArrayAdapter<String> adapter;
 
@@ -35,9 +36,9 @@ public class ListViewActivity extends Activity {
         setContentView(R.layout.activity_viewallreports);
 
         listView = (ListView) findViewById(R.id.mobile_list);
-        values = new String[]{"Atlanta", "California"};
+        keyval = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+                android.R.layout.simple_list_item_1, android.R.id.text1, keyval);
 
         listView.setAdapter(adapter);
 
@@ -47,9 +48,11 @@ public class ListViewActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
+                Intent i = new Intent(ListViewActivity.this, ViewIndividualReport.class);
+                i.putExtra("key", itemValue);
+                startActivity(i);
             }
         });
 
@@ -66,7 +69,7 @@ public class ListViewActivity extends Activity {
                     keyval.add(keyvalue.location.toString());
                 }
 
-                values = keyval.toArray(new String[keyval.size()]);
+//                values = keyval.toArray(new String[keyval.size()]);
                 adapter.notifyDataSetChanged();
             }
             /**
