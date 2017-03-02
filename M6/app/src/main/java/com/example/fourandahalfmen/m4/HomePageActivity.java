@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.fourandahalfmen.m4.data.Users;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,6 +69,7 @@ public class HomePageActivity extends Activity {
         submitButton = (Button) findViewById(R.id.submit_a_report);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // if click on this button, send submitwaterreport activity
                 Intent i = new Intent(HomePageActivity.this, SubmitWaterReport.class);
                 i.putExtra("username", fromUsername);
                 startActivity(i);
@@ -79,6 +79,10 @@ public class HomePageActivity extends Activity {
         String reflocation = "users/" + fromUsername;
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
+            /**
+             * get data from firebase based on user-specific id and set them to textfields and
+             * spinners on page
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Users post = dataSnapshot.getValue(Users.class);
@@ -90,7 +94,9 @@ public class HomePageActivity extends Activity {
                 state.setText(post.state);
                 zip_code.setText(String.valueOf(post.zip_code));
             }
-
+            /**
+             * necessary method required for firebase
+             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -100,18 +106,20 @@ public class HomePageActivity extends Activity {
         save = (Button) findViewById(R.id.Save);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // if fields are empty, display an error.
                 if (password.getText().toString() == "" || email.getText().toString() == "" ||
                         street_address.getText().toString() == "" || city.getText().toString() == null ||
                         state.getText().toString() == "" || zip_code.getText().toString() == null) {
 
-                    // If Fields are empty, display an error.
                     alertMessage("Blank Fields", "Some fields are empty. Please fill in all fields.");
 
                 } else {
+                    // if wrong type, send alert
                     if (!writeNewUser(fromUsername, password.getText().toString(), userSpinner.getSelectedItem().toString(),
                             email.getText().toString(), street_address.getText().toString(), city.getText().toString(),
                             state.getText().toString(), zip_code.getText().toString())) {
                         alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
+                    // else all good
                     } else {
                         alertMessage("Successful Change", "Your changes have been recorded.");
                     }
@@ -120,7 +128,18 @@ public class HomePageActivity extends Activity {
         });
     }
 
-
+    /**
+     * update user and push to firebase
+     * @param username          username of user
+     * @param password          password of user
+     * @param account_type      account type of user
+     * @param email             email of user
+     * @param street_address    street addree of user
+     * @param city              city of address
+     * @param state             state of address
+     * @param zip_code          zipcode of address
+     * @return  boolean value based on successful input into firebase
+     */
     private boolean writeNewUser(String username, String password, String account_type,
                                  String email, String street_address, String city,
                                  String state, String zip_code) {
@@ -143,13 +162,11 @@ public class HomePageActivity extends Activity {
         return true;
     }
 
-
-    public void onReportClick(View v) {
-        Intent i = new Intent(HomePageActivity.this, SubmitWaterReport.class);
-        i.putExtra("username", fromUsername);
-        HomePageActivity.this.startActivity(i);
-    }
-
+    /**
+     * Alert Message general function for generating alerts
+     * @param title title of message
+     * @param body  body of message
+     */
     private void alertMessage(String title, String body) {
         AlertDialog.Builder dialog2 = new AlertDialog.Builder(HomePageActivity.this);
         dialog2.setCancelable(false);

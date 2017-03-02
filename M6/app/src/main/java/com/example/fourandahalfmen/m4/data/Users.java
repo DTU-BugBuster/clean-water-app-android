@@ -13,10 +13,27 @@ public final class Users {
     public int attempts;
     public boolean locked;
 
+    /**
+     * Constructor with no parameters
+     */
     public Users() {
         this(null, null, null, null, null, null, null, 0, 0, false);
     }
 
+    /**
+     * Constructor will all parameters
+     *
+     * @param username          username of user
+     * @param password          password of user
+     * @param account_type      account type of user (etc. admin)
+     * @param email             email of user
+     * @param street_address    street address of user
+     * @param city              city of address
+     * @param state             state of address
+     * @param zip_code          zip code of address
+     * @param attempts          login attemps if wrong
+     * @param locked            if account is locked
+     */
     public Users(String username, String password, String account_type,
                  String email, String street_address, String city,
                  String state, int zip_code, int attempts, boolean locked) {

@@ -79,7 +79,7 @@
         android:id="@+id/editState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Georgia"
+        android:hint="State"
         android:inputType="text"
         android:maxLines="1"
         android:layout_below="@+id/editCity"

@@ -57,15 +57,17 @@ public class SubmitWaterReport extends AppCompatActivity {
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // If fields are empty, display an error.
                 if (location.getText().toString() == "") {
-
-                    // If Fields are empty, display an error.
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
+                    // if successful entry, alert user
                     if (submitReport(location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
                             waterConditionSpinner.getSelectedItem().toString())) {
                         alertMessage("Succesful Entry", "Thank you for reporting.");
+
+                    // if error in entry, alert user
                     } else {
                         alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
                     }
@@ -89,18 +91,21 @@ public class SubmitWaterReport extends AppCompatActivity {
     }
 
 
-
     /**
      * Actual process of communicating with Firebase to submit report
      * @return boolean determines successful submitting report
      */
     private boolean submitReport(String location, String waterType, String waterCondition) {
-
         WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition);
         mDatabase.child(location).setValue(wr);
         return true;
     }
 
+    /**
+     * Alert Message general function for generating alerts
+     * @param title title of message
+     * @param body  body of message
+     */
     private void alertMessage(String title, String body) {
         AlertDialog.Builder dialog2 = new AlertDialog.Builder(SubmitWaterReport.this);
         dialog2.setCancelable(false);

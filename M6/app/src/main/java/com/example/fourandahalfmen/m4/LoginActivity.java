@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.sign_in_button);
 
         /**
-         * Login Button Listerner
+         * Login Button Listener
          */
         loginButton.setOnClickListener(new View.OnClickListener() {
             /**
@@ -101,53 +101,62 @@ public class LoginActivity extends AppCompatActivity {
         String reflocation = "users/" + insertUsername;
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
+
+            /**
+             * get data from firebase based on user-specific id, username and password
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                // if could not find key in users database
                 if (dataSnapshot.getValue() == null) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
-                    dialog.setCancelable(false);
-                    dialog.setTitle("Incorrect Username");
-                    dialog.setMessage("Couldn't find account. Please try again." );
-                    dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
-                    final AlertDialog alert = dialog.create();
-                    alert.show();
+                    alertMessage("Incorrect Username", "Couldn't find account. Please try again.");
                 } else {
+                    // check password in database and if equal to input, then send to Homepageactivity
                     Users post = dataSnapshot.getValue(Users.class);
                     System.out.println(post);
                     if (insertPassword.equals(post.password)) {
+                        // login reporting database
                         LoginReports lr = new LoginReports(true, insertUsername);
                         mDatabase.child(new Date().toString()).setValue(lr);
                         Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
                         i.putExtra("username", insertUsername);
                         startActivity(i);
+
+                    // wrong password
                     } else {
-                        AlertDialog.Builder dialog2 = new AlertDialog.Builder(LoginActivity.this);
-                        dialog2.setCancelable(false);
-                        dialog2.setTitle("Incorrect Password");
-                        dialog2.setMessage("Couldn't find account. Please try again.");
-                        dialog2.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
-                        final AlertDialog alert = dialog2.create();
-                        alert.show();
+                        alertMessage("Incorrect Password", "Couldn't find account. Please try again.");
                     }
                 }
             }
-
+            /**
+             * necessary method required for firebase
+             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+
+    /**
+     * Alert Message general function for generating alerts
+     * @param title title of message
+     * @param body  body of message
+     */
+    private void alertMessage(String title, String body) {
+        AlertDialog.Builder dialog2 = new AlertDialog.Builder(LoginActivity.this);
+        dialog2.setCancelable(false);
+        dialog2.setTitle(title);
+        dialog2.setMessage(body);
+        dialog2.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog alert = dialog2.create();
+        alert.show();
     }
 }
 

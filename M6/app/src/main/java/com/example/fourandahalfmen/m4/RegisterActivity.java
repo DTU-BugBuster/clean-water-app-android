@@ -59,6 +59,7 @@ public class RegisterActivity extends Activity {
 
         onCreateUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // if any textfield is empty, send alert to user
                 if (username.getText().toString() == "" ||
                         password.getText().toString() == "" || email.getText().toString() == "" ||
                         street_address.getText().toString() == "" || city.getText().toString() == null ||
@@ -68,12 +69,15 @@ public class RegisterActivity extends Activity {
                     alertMessage("Blank Fields", "Some fields are empty. Please fill in all fields.");
 
                 } else {
+                    // if all good and user is written to firebase, send to loginactivity page
                     if (writeNewUser(username.getText().toString(), password.getText().toString(), userSpinner.getSelectedItem().toString(),
                             email.getText().toString(), street_address.getText().toString(), city.getText().toString(),
                             state.getText().toString(), zip_code.getText().toString())) {
                         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                         i.putExtra("username", username.getText().toString());
                         startActivity(i);
+
+                    // else send alert to user
                     } else {
                         alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
                     }
@@ -96,14 +100,28 @@ public class RegisterActivity extends Activity {
         });
     }
 
+    /**
+     * create new user and add to firebase
+     * @param username          username of user
+     * @param password          password of user
+     * @param account_type      account type of user
+     * @param email             email of user
+     * @param street_address    street addree of user
+     * @param city              city of address
+     * @param state             state of address
+     * @param zip_code          zipcode of address
+     * @return  boolean value based on successful input into firebase
+     */
     private boolean writeNewUser(String username, String password, String account_type,
                                  String email, String street_address, String city,
                                  String state, String zip_code) {
 
+        // check if email as @ symbol
         if (!email.contains("@")) {
             return false;
         }
 
+        // check if zip is int
         int zip = 0;
         try {
             zip = Integer.parseInt(zip_code);
@@ -118,6 +136,11 @@ public class RegisterActivity extends Activity {
         return true;
     }
 
+    /**
+     * Alert Message general function for generating alerts
+     * @param title title of message
+     * @param body  body of message
+     */
     private void alertMessage(String title, String body) {
         AlertDialog.Builder dialog2 = new AlertDialog.Builder(RegisterActivity.this);
         dialog2.setCancelable(false);
