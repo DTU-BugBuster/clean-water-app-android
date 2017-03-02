@@ -33,6 +33,7 @@ public class HomePageActivity extends Activity {
     private Button logout;
     private Button submitButton;
     private Button save;
+    private Button viewReports;
 
 
     /* database instance */
@@ -124,6 +125,15 @@ public class HomePageActivity extends Activity {
                         alertMessage("Successful Change", "Your changes have been recorded.");
                     }
                 }
+            }
+        });
+
+        viewReports = (Button) findViewById(R.id.views_all_reports);
+        viewReports.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if click on this button, send ListViewactivity activity
+                Intent i = new Intent(HomePageActivity.this, ListViewActivity.class);
+                startActivity(i);
             }
         });
     }

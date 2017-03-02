@@ -7,11 +7,11 @@ import java.util.Date;
 
 public class WaterReport {
 
-    String location;
-    String user;
-    String waterType;
-    String waterCondition;
-    String date;
+    public String location;
+    public String user;
+    public String waterType;
+    public String waterCondition;
+    public String date;
 
     /**
      * Constructor with no parameters
