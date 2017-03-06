@@ -15,9 +15,9 @@
 		9A2668281E5E780C00D1F592 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A2668261E5E780C00D1F592 /* LaunchScreen.storyboard */; };
 		9A2668331E5E780C00D1F592 /* Clean_WaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2668321E5E780C00D1F592 /* Clean_WaterTests.swift */; };
 		9A26683E1E5E780C00D1F592 /* Clean_WaterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A26683D1E5E780C00D1F592 /* Clean_WaterUITests.swift */; };
-		9A26684C1E5E79D700D1F592 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A26684B1E5E79D700D1F592 /* GoogleService-Info.plist */; };
 		9A4DABAD1E5E82A000AB9DB4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4DABAC1E5E82A000AB9DB4 /* LoginViewController.swift */; };
 		9A4DABAF1E5E82DA00AB9DB4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4DABAE1E5E82DA00AB9DB4 /* RegisterViewController.swift */; };
+		9A910F241E68BF25006EB57B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A910F231E68BF25006EB57B /* GoogleService-Info.plist */; };
 		AB8694DE8ADED5B5EDDF8D0A /* Pods_Clean_WaterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31D39B64A294237D1F3598 /* Pods_Clean_WaterTests.framework */; };
 		DDFA974A55AFC99B4BC50701 /* Pods_Clean_Water.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FED1BBDAF9470614FC6105F /* Pods_Clean_Water.framework */; };
 /* End PBXBuildFile section */
@@ -58,9 +58,9 @@
 		9A2668391E5E780C00D1F592 /* Clean WaterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clean WaterUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A26683D1E5E780C00D1F592 /* Clean_WaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clean_WaterUITests.swift; sourceTree = "<group>"; };
 		9A26683F1E5E780C00D1F592 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A26684B1E5E79D700D1F592 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A4DABAC1E5E82A000AB9DB4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9A4DABAE1E5E82DA00AB9DB4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		9A910F231E68BF25006EB57B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4343F62FA6EE788B2E362AC /* Pods-Clean Water.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clean Water.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clean Water/Pods-Clean Water.release.xcconfig"; sourceTree = "<group>"; };
 		B689572D0945AFF5CA7AFF86 /* Pods-Clean Water.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clean Water.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clean Water/Pods-Clean Water.debug.xcconfig"; sourceTree = "<group>"; };
 		FB988146CFE5D18D7640D490 /* Pods-Clean WaterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clean WaterUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clean WaterUITests/Pods-Clean WaterUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 				9A2668241E5E780C00D1F592 /* Assets.xcassets */,
 				9A2668261E5E780C00D1F592 /* LaunchScreen.storyboard */,
 				9A2668291E5E780C00D1F592 /* Info.plist */,
-				9A26684B1E5E79D700D1F592 /* GoogleService-Info.plist */,
+				9A910F231E68BF25006EB57B /* GoogleService-Info.plist */,
 			);
 			path = "Clean Water";
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A2668281E5E780C00D1F592 /* LaunchScreen.storyboard in Resources */,
-				9A26684C1E5E79D700D1F592 /* GoogleService-Info.plist in Resources */,
+				9A910F241E68BF25006EB57B /* GoogleService-Info.plist in Resources */,
 				9A2668251E5E780C00D1F592 /* Assets.xcassets in Resources */,
 				9A2668231E5E780C00D1F592 /* Main.storyboard in Resources */,
 			);
