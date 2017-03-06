@@ -15,6 +15,7 @@ Provide a way to navigate to the water availability screen.
 
 Display a map
 
+
 Place pins at the locations of each report
 
 Show report details for a pin when it is selected by the user
