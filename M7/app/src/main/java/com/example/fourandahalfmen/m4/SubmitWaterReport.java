@@ -96,7 +96,7 @@ public class SubmitWaterReport extends AppCompatActivity {
      * @return boolean determines successful submitting report
      */
     private boolean submitReport(String location, String waterType, String waterCondition) {
-        WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition);
+        WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition, 0.0, 0.0);
         mDatabase.child(location).setValue(wr);
         return true;
     }

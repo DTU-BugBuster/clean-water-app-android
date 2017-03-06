@@ -1,28 +1,40 @@
 package com.example.fourandahalfmen.m4;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.example.fourandahalfmen.m4.data.WaterReport;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.fourandahalfmen.m4.R;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
-public class ViewWaterAvailabilityActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ViewWaterAvailabilityActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private LocationServices mLastLocation;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("waterReports");
+
+    /**
+     * View Created
+     * @param savedInstanceState  Bundle instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,45 +42,63 @@ public class ViewWaterAvailabilityActivity extends FragmentActivity implements O
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        // Create an instance of GoogleAPIClient.
-//        if (mGoogleApiClient == null) {
-//            mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                    .addConnectionCallbacks(this)
-//                    .addOnConnectionFailedListener(this)
-//                    .addApi(LocationServices.API)
-//                    .build();
-//        }
     }
 
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
+    /**
+     * Create Google Map View
+     * @param googleMap google map that is created
+     */
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
+        googleMap.setOnMarkerClickListener(this);
 
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        ref.addValueEventListener(new ValueEventListener() {
+            /**
+             * get data from firebase based on location id
+             */
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+
+
+                    WaterReport post = childDataSnapshot.getValue(WaterReport.class);
+
+                    MarkerOptions m = new MarkerOptions().position(new LatLng(post.llat, post.llong));
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(post.llat, post.llong)).title(post.location.toString()));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(post.llat, post.llong)));
+
+
+                    System.out.println(post.location.toString());
+                    System.out.println(new LatLng(post.llat, post.llong).toString());
+                }
+            }
+
+            /**
+             * necessary method required for firebase
+             */
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
-//    @Override
-//    public void onConnected(Bundle connectionHint) {
-//        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-//                mGoogleApiClient);
-//        if (mLastLocation != null) {
-//            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-//            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-//        }
-//    }
+    /**
+     * Function to handle marking clicking.
+     * @param marker    marker that is clicked on
+     * @return boolean value if marker = marker
+     */
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+
+        if (marker.equals(marker)) {
+            Intent i = new Intent(ViewWaterAvailabilityActivity.this, ViewIndividualReport.class);
+            i.putExtra("key", marker.getTitle());
+            startActivity(i);
+            return true;
+        }
+        return false;
+    }
 }

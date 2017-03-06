@@ -78,6 +78,26 @@ public class HomePageActivity extends Activity {
             }
         });
 
+
+        viewReports = (Button) findViewById(R.id.views_all_reports);
+        viewReports.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if click on this button, send ListViewactivity activity
+                Intent i = new Intent(HomePageActivity.this, ListViewActivity.class);
+                startActivity(i);
+            }
+        });
+
+        viewWaterAvailability  = (Button) findViewById(R.id.views_WaterAvailability);
+        viewWaterAvailability.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if click on this button, send WaterAvailability activity
+                Intent i = new Intent(HomePageActivity.this, ViewWaterAvailabilityActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         String reflocation = "users/" + fromUsername;
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
@@ -128,25 +148,6 @@ public class HomePageActivity extends Activity {
                 }
             }
         });
-
-        viewReports = (Button) findViewById(R.id.views_all_reports);
-        viewReports.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // if click on this button, send ListViewactivity activity
-                Intent i = new Intent(HomePageActivity.this, ListViewActivity.class);
-                startActivity(i);
-            }
-        });
-
-        viewWaterAvailability  = (Button) findViewById(R.id.views_WaterAvailability);
-        viewReports.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // if click on this button, send WaterAvailability activity
-                Intent i = new Intent(HomePageActivity.this, ViewWaterAvailabilityActivity.class);
-                startActivity(i);
-            }
-        });
-
     }
 
     /**
@@ -155,7 +156,7 @@ public class HomePageActivity extends Activity {
      * @param password          password of user
      * @param account_type      account type of user
      * @param email             email of user
-     * @param street_address    street addree of user
+     * @param street_address    street address of user
      * @param city              city of address
      * @param state             state of address
      * @param zip_code          zipcode of address

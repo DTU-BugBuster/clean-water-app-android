@@ -12,12 +12,14 @@ public class WaterReport {
     public String waterType;
     public String waterCondition;
     public String date;
+    public Double llat;
+    public Double llong;
 
     /**
      * Constructor with no parameters
      */
     public WaterReport() {
-        this("null", "null", "null", "null");
+        this("null", "null", "null", "null", 0.0, 0.0);
         this.date = new Date().toString();
     }
 
@@ -28,11 +30,13 @@ public class WaterReport {
      * @param waterType         type of water
      * @param waterCondition    condition of water
      */
-    public WaterReport(String location, String user, String waterType, String waterCondition) {
+    public WaterReport(String location, String user, String waterType, String waterCondition, Double llat, Double llong) {
         this.location = location;
         this.user = user;
         this.waterType = waterType;
         this.waterCondition = waterCondition;
         this.date = new Date().toString();
+        this.llat = llat;
+        this.llong = llong;
     }
 }
