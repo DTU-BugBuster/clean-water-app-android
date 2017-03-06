@@ -17,37 +17,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
-            android:text="Location of Water"
-            android:ems="10"
-            android:id="@+id/location"
-            android:layout_marginTop="12dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="Water Type"
-            android:layout_width="match_parent"
-            android:id="@+id/waterType"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/location"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="27dp" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/waterTypeSpinner"
-            android:layout_below="@+id/waterType"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp" />
-
         <Button
             android:text="Cancel"
             android:layout_width="wrap_content"
@@ -62,23 +31,13 @@
             android:layout_alignParentEnd="true" />
 
         <TextView
-            android:text="Water Condition"
-            android:layout_width="match_parent"
-            android:id="@+id/waterCondition"
+            android:text="Location of Water"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:layout_below="@+id/waterTypeSpinner"
+            android:id="@+id/latitude"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/waterConditionSpinner"
-            android:layout_below="@+id/waterCondition"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp" />
 
         <Button
             android:text="Submit"
@@ -88,11 +47,57 @@
             android:layout_marginStart="50dp"
             android:id="@+id/submitButton"
             android:onClick="onSubmitClick (SubmitWaterReport)"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="73dp"
             android:layout_below="@+id/waterConditionSpinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/waterConditionSpinner"
+            android:layout_marginTop="45dp"
+            android:layout_below="@+id/waterCondition"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Water Condition"
+            android:layout_width="match_parent"
+            android:id="@+id/waterCondition"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="63dp"
+            android:layout_below="@+id/waterTypeSpinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/waterTypeSpinner"
+            android:layout_marginTop="39dp"
+            android:layout_below="@+id/waterType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Water Type"
+            android:layout_width="match_parent"
+            android:id="@+id/waterType"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/longitude"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Location of Water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/longitude"
+            android:layout_below="@+id/latitude"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 </RelativeLayout>
