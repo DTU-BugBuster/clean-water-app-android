@@ -19,6 +19,9 @@
             android:name=".LoginActivity"
             android:label="M4" />
         <activity
+            android:name=".ViewWaterAvailabilityActivity"
+            android:label="M4" />
+        <activity
             android:name=".ViewIndividualReport"
             android:label="M4" />
         <activity
@@ -54,10 +57,6 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".SubmitWaterReport" />
-        <activity
-            android:name=".data.ViewWaterAvailabilityActivity"
-            android:label="@string/title_activity_view_water_availability"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

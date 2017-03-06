@@ -34,6 +34,7 @@ public class HomePageActivity extends Activity {
     private Button submitButton;
     private Button save;
     private Button viewReports;
+    private Button viewWaterAvailability;
 
 
     /* database instance */
@@ -136,6 +137,16 @@ public class HomePageActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        viewWaterAvailability  = (Button) findViewById(R.id.views_WaterAvailability);
+        viewReports.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if click on this button, send WaterAvailability activity
+                Intent i = new Intent(HomePageActivity.this, ViewWaterAvailabilityActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     /**
