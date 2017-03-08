@@ -23,6 +23,8 @@ public class ViewIndividualReport extends Activity {
 
     private String fromKey;
     private TextView viewLocation;
+    private TextView viewLong;
+    private TextView viewLat;
     private TextView viewDate;
     private TextView viewWaterCondition;
     private TextView viewWaterType;
@@ -41,6 +43,9 @@ public class ViewIndividualReport extends Activity {
         viewWaterCondition = (TextView) findViewById(R.id.viewWaterCondition);
         viewWaterType = (TextView) findViewById(R.id.viewWaterType);
         viewUser = (TextView) findViewById(R.id.viewUser);
+        viewLat = (TextView) findViewById(R.id.viewLat);
+        viewLong = (TextView) findViewById(R.id.viewLong);
+
 
         String reflocation =  "waterReports/" + fromKey.toString();
         DatabaseReference ref = database.getReference(reflocation);
@@ -57,6 +62,8 @@ public class ViewIndividualReport extends Activity {
                 viewWaterType.setText(post.waterType.toString());
                 viewWaterCondition.setText(post.waterCondition.toString());
                 viewUser.setText(post.user.toString());
+                viewLat.setText(post.llat.toString());
+                viewLong.setText(post.llong.toString());
             }
             /**
              * necessary method required for firebase
