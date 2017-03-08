@@ -7,17 +7,38 @@
         android:id="@+id/viewLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:layout_marginTop="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/viewLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/viewLat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_below="@+id/viewLong"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:id="@+id/viewDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/viewLocation"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/viewWaterType"
