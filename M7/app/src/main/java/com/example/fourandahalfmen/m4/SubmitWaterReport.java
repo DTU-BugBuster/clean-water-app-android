@@ -33,13 +33,16 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
     private String fromUsername;
     private Spinner waterTypeSpinner;
     private Spinner waterConditionSpinner;
-    private TextView location;
+    private EditText location;
     private Button submitButton;
     private Button cancelButton;
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+    private String latitude;
+    private String longitude;
+    private static final String TAG = "SubmitWaterReport";
 
     /* values */
     private String[] waterTypes = {"Bottled", "Well", "Stream", "Lake", "Spring", "Other"};
@@ -56,7 +59,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
 
         fromUsername = getIntent().getStringExtra("username");
 
-        location = (TextView) findViewById(R.id.location);
+        location = (EditText) findViewById(R.id.location);
 
         waterTypeSpinner = (Spinner) findViewById(R.id.waterTypeSpinner);
         ArrayAdapter<String> waterTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, waterTypes);
@@ -78,8 +81,9 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
 
                 } else {
                     // if successful entry, alert user
-                    if (submitReport(location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
-                            waterConditionSpinner.getSelectedItem().toString())) {
+                    if (submitReport(
+                            location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
+                            waterConditionSpinner.getSelectedItem().toString(), mLastLocation.getLatitude(), mLastLocation.getLongitude())) {
                         alertMessage("Succesful Entry", "Thank you for reporting.");
 
                         // if error in entry, alert user
@@ -105,7 +109,9 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
         });
 
         mLatitudeText = (TextView) findViewById(R.id.latitude);
+        mLatitudeText.setText(latitude);
         mLongitudeText = (TextView) findViewById(R.id.longitude);
+        mLongitudeText.setText(longitude);
         buildGoogleApiClient();
 
     }
@@ -126,6 +132,9 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
+        if (mGoogleApiClient.isConnected()) {
+            System.out.println("Connected1");
+        }
     }
 
     @Override
@@ -157,8 +166,12 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            mLatitudeText.setText(String.format("%f", mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.format("%f", mLastLocation.getLongitude()));
+            latitude = String.valueOf(mLastLocation.getLatitude());
+            longitude = String.valueOf(mLastLocation.getLatitude());
+            System.out.println(latitude);
+            System.out.println(longitude);
+//            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+//            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
     }
 
@@ -182,8 +195,8 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
      * Actual process of communicating with Firebase to submit report
      * @return boolean determines successful submitting report
      */
-    private boolean submitReport(String location, String waterType, String waterCondition) {
-        WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition, 0.0, 0.0);
+    private boolean submitReport(String location, String waterType, String waterCondition, Double llat, Double llong) {
+        WaterReport wr = new WaterReport(location, fromUsername, waterType, waterCondition, llat, llong);
         mDatabase.child(location).setValue(wr);
         return true;
     }

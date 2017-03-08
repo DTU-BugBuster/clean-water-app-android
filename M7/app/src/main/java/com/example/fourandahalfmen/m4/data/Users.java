@@ -31,7 +31,7 @@ public final class Users {
      * @param city              city of address
      * @param state             state of address
      * @param zip_code          zip code of address
-     * @param attempts          login attemps if wrong
+     * @param attempts          login attempts if wrong
      * @param locked            if account is locked
      */
     public Users(String username, String password, String account_type,

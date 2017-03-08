@@ -17,6 +17,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Location" />
+
         <Button
             android:text="Cancel"
             android:layout_width="wrap_content"
@@ -85,19 +96,21 @@
             android:layout_width="match_parent"
             android:id="@+id/waterType"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="31dp"
             android:layout_below="@+id/longitude"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:text="Location of Water"
+            android:id="@+id/longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/longitude"
+            android:text="Location of Water"
             android:layout_below="@+id/latitude"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
     </RelativeLayout>
 
 </RelativeLayout>
