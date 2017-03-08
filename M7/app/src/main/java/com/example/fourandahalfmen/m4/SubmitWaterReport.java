@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.WaterReport;
+import com.google.android.gms.location.LocationRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +44,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
     private String latitude;
     private String longitude;
     private static final String TAG = "SubmitWaterReport";
+    private final int LOCATION_PERMISSION_REQUEST_CODE = 123;
 
     /* values */
     private String[] waterTypes = {"Bottled", "Well", "Stream", "Lake", "Spring", "Other"};
@@ -108,11 +110,12 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
             }
         });
 
+        buildGoogleApiClient();
         mLatitudeText = (TextView) findViewById(R.id.latitude);
         mLatitudeText.setText(latitude);
         mLongitudeText = (TextView) findViewById(R.id.longitude);
         mLongitudeText.setText(longitude);
-        buildGoogleApiClient();
+
 
     }
 
@@ -150,6 +153,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
      */
     @Override
     public void onConnected(Bundle connectionHint) {
+
         // Provides a simple way of getting a device's location and is well suited for
         // applications that do not require a fine-grained location and that do not need location
         // updates. Gets the best and most recent location currently available, which may be null
@@ -164,12 +168,24 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+//        // Create the LocationRequest object
+//        LocationRequest mLocationRequest = LocationRequest.create()
+//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+//                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+//                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+//        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             latitude = String.valueOf(mLastLocation.getLatitude());
             longitude = String.valueOf(mLastLocation.getLatitude());
-            System.out.println(latitude);
-            System.out.println(longitude);
+            mLatitudeText = (TextView) findViewById(R.id.latitude);
+            mLatitudeText.setText(latitude);
+            mLongitudeText = (TextView) findViewById(R.id.longitude);
+            mLatitudeText.setText(longitude);
+
 //            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
 //            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
