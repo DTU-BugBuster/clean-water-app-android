@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
+//import com.google.android.gms.location.LocationListener;
 
 public class SubmitWaterReport extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -159,36 +161,37 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
         // updates. Gets the best and most recent location currently available, which may be null
         // in rare cases when a location is not available.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
             return;
         }
+        startLocationUpdates();
+    }
 
-//        // Create the LocationRequest object
-//        LocationRequest mLocationRequest = LocationRequest.create()
-//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-//                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-//                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
-//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-//        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+    protected void startLocationUpdates() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        com.google.android.gms.location.LocationListener mlocationListener = new com.google.android.gms.location.LocationListener() {
+            public void onLocationChanged(Location location) {
+                mLastLocation = location;
+                updateUI();
+            }
+        };
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null) {
-            latitude = String.valueOf(mLastLocation.getLatitude());
-            longitude = String.valueOf(mLastLocation.getLatitude());
-            mLatitudeText = (TextView) findViewById(R.id.latitude);
-            mLatitudeText.setText(latitude);
-            mLongitudeText = (TextView) findViewById(R.id.longitude);
-            mLatitudeText.setText(longitude);
+        updateUI();
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, mlocationListener);
 
-//            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-//            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-        }
+    }
+
+
+
+    private void updateUI() {
+        mLatitudeText = (TextView) findViewById(R.id.latitude);
+        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+        mLongitudeText = (TextView) findViewById(R.id.longitude);
+        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
     }
 
     @Override
