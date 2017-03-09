@@ -28,7 +28,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
-//import com.google.android.gms.location.LocationListener;
+import android.location.Geocoder;
+import android.location.Address;
+import java.util.Locale;
+import java.util.List;
 
 public class SubmitWaterReport extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -43,8 +46,8 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
     protected Location mLastLocation;
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private static final String TAG = "SubmitWaterReport";
     private final int LOCATION_PERMISSION_REQUEST_CODE = 123;
 
@@ -84,10 +87,11 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
+                    getLatLongFromAddress(location.getText().toString());
                     // if successful entry, alert user
                     if (submitReport(
                             location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
-                            waterConditionSpinner.getSelectedItem().toString(), mLastLocation.getLatitude(), mLastLocation.getLongitude())) {
+                            waterConditionSpinner.getSelectedItem().toString(), latitude, longitude)) {
                         alertMessage("Succesful Entry", "Thank you for reporting.");
 
                         // if error in entry, alert user
@@ -113,12 +117,22 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
         });
 
         buildGoogleApiClient();
-        mLatitudeText = (TextView) findViewById(R.id.latitude);
-        mLatitudeText.setText(latitude);
-        mLongitudeText = (TextView) findViewById(R.id.longitude);
-        mLongitudeText.setText(longitude);
 
+    }
 
+    private void getLatLongFromAddress(String address)
+    {
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        try
+        {
+            List<Address> addresses = geoCoder.getFromLocationName(address , 1);
+            latitude = addresses.get(0).getLatitude();
+            longitude = addresses.get(0).getLongitude();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -155,44 +169,13 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
      */
     @Override
     public void onConnected(Bundle connectionHint) {
-
-        // Provides a simple way of getting a device's location and is well suited for
-        // applications that do not require a fine-grained location and that do not need location
-        // updates. Gets the best and most recent location currently available, which may be null
-        // in rare cases when a location is not available.
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-            return;
-        }
-        startLocationUpdates();
-    }
-
-    protected void startLocationUpdates() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        com.google.android.gms.location.LocationListener mlocationListener = new com.google.android.gms.location.LocationListener() {
-            public void onLocationChanged(Location location) {
-                mLastLocation = location;
-                updateUI();
-            }
-        };
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        updateUI();
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, mlocationListener);
-
     }
 
 
 
-    private void updateUI() {
-        mLatitudeText = (TextView) findViewById(R.id.latitude);
-        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-        mLongitudeText = (TextView) findViewById(R.id.longitude);
-        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-    }
+
+
+
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
