@@ -119,9 +119,30 @@ public class LoginActivity extends AppCompatActivity {
                         // login reporting database
                         LoginReports lr = new LoginReports(true, insertUsername);
                         mDatabase.child(new Date().toString()).setValue(lr);
-                        Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
-                        i.putExtra("username", insertUsername);
-                        startActivity(i);
+
+                        if (post.account_type == "User") {
+                            Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
+                            i.putExtra("username", insertUsername);
+                            startActivity(i);
+                        }
+
+                        if (post.account_type == "Worker") {
+                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Worker.class);
+                            i.putExtra("username", insertUsername);
+                            startActivity(i);
+                        }
+
+                        if (post.account_type == "Manager") {
+                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Manager.class);
+                            i.putExtra("username", insertUsername);
+                            startActivity(i);
+                        }
+
+                        if (post.account_type == "Admin") {
+                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Admin.class);
+                            i.putExtra("username", insertUsername);
+                            startActivity(i);
+                        }
 
                     // wrong password
                     } else {
