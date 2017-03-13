@@ -61,14 +61,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/waterConditionSpinner"
             android:layout_marginTop="45dp"
-            android:layout_below="@+id/waterCondition"
+            android:layout_below="@+id/waterLocation"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:text="Water Condition"
             android:layout_width="match_parent"
-            android:id="@+id/waterCondition"
+            android:id="@+id/waterLocation"
             android:layout_height="wrap_content"
             android:layout_marginTop="63dp"
             android:layout_below="@+id/waterTypeSpinner"
@@ -80,14 +80,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/waterTypeSpinner"
             android:layout_marginTop="39dp"
-            android:layout_below="@+id/waterType"
+            android:layout_below="@+id/contaminantPPM"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:text="Water Type"
             android:layout_width="match_parent"
-            android:id="@+id/waterType"
+            android:id="@+id/contaminantPPM"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:layout_below="@+id/location"
