@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,34 +115,36 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // check password in database and if equal to input, then send to Homepageactivity
                     Users post = dataSnapshot.getValue(Users.class);
-                    System.out.println(post);
+//                    System.out.println(post);
                     if (insertPassword.equals(post.password)) {
                         // login reporting database
                         LoginReports lr = new LoginReports(true, insertUsername);
                         mDatabase.child(new Date().toString()).setValue(lr);
 
-                        if (post.account_type == "User") {
+                        if (post.account_type.toString().equals("User")) {
                             Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
                             i.putExtra("username", insertUsername);
                             startActivity(i);
                         }
 
-                        if (post.account_type == "Worker") {
+                        if (post.account_type.toString().equals("Worker")) {
                             Intent i = new Intent(LoginActivity.this, HomePageActivity_Worker.class);
                             i.putExtra("username", insertUsername);
                             startActivity(i);
                         }
 
-                        if (post.account_type == "Manager") {
+                        if (post.account_type.toString().equals("Manager")) {
                             Intent i = new Intent(LoginActivity.this, HomePageActivity_Manager.class);
                             i.putExtra("username", insertUsername);
                             startActivity(i);
                         }
 
-                        if (post.account_type == "Admin") {
+                        if (post.account_type.toString().equals("Admin")) {
                             Intent i = new Intent(LoginActivity.this, HomePageActivity_Admin.class);
                             i.putExtra("username", insertUsername);
                             startActivity(i);
+                        } else {
+                            Log.d("Login Error", "There was a problem with the user type login attempt.");
                         }
 
                     // wrong password

@@ -49,7 +49,7 @@ public class HomePageActivity_Worker extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage_user);
+        setContentView(R.layout.activity_homepage_worker);
         fromUsername = getIntent().getStringExtra("username");
 
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
@@ -85,7 +85,7 @@ public class HomePageActivity_Worker extends Activity {
         submitWaterPurity = (Button) findViewById(R.id.submit_WaterPurity);
         submitWaterPurity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // if click on this button, send submitwaterreport activity
+                // if click on this button, send submitwaterpurity activity
                 Intent i = new Intent(HomePageActivity_Worker.this, SubmitWaterReport.class);
                 i.putExtra("username", fromUsername);
                 startActivity(i);

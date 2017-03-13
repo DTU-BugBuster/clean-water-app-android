@@ -30,6 +30,15 @@
             android:name=".HomePageActivity"
             android:label="M4" />
         <activity
+            android:name=".HomePageActivity_Worker"
+            android:label="M4" />
+        <activity
+            android:name=".HomePageActivity_Manager"
+            android:label="M4" />
+        <activity
+            android:name=".HomePageActivity_Admin"
+            android:label="M4" />
+        <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
