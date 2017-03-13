@@ -45,7 +45,7 @@ public class HomePageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+        setContentView(R.layout.activity_homepage_user);
         fromUsername = getIntent().getStringExtra("username");
 
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
