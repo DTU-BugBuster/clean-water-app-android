@@ -5,7 +5,6 @@ import java.util.Date;
 public class WaterPurityReport {
 
     private String date;
-    private String time;
     private int reportNumber;
     private String user;
     private String location;
@@ -18,8 +17,6 @@ public class WaterPurityReport {
 
     /**
      *
-     * @param date date of purity report
-     * @param time time of purity report
      * @param reportNumber report number
      * @param user workers name
      * @param location location of water source
@@ -29,12 +26,11 @@ public class WaterPurityReport {
      * @param virusPPM virusPPM of water - Parts Per Million
      * @param contaminantPPM contaminantPPM  - Parts Per Million
      */
-    public WaterPurityReport(String date, String time, int reportNumber,
+    public WaterPurityReport(int reportNumber,
                              String user, String location, double llat, double llong,
                              String waterCondition, double virusPPM, double contaminantPPM) {
 
-        this.date = date;
-        this.time = time;
+        this.date = new Date().toString();
         this.reportNumber = reportNumber;
         this.user = user;
         this.location = location;

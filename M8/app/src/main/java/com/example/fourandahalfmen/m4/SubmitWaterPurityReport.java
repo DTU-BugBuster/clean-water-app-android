@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.fourandahalfmen.m4.data.Users;
 import com.example.fourandahalfmen.m4.data.WaterPurityReport;
 import com.example.fourandahalfmen.m4.data.WaterReport;
 import com.google.android.gms.common.ConnectionResult;
@@ -23,13 +24,16 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.Locale;
 
-public class SubmitWaterPurityReport extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
+public class SubmitWaterPurityReport extends AppCompatActivity {
 
     /* instance variables */
     private String fromUsername;
@@ -38,23 +42,26 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
     private Button cancelButton;
     protected GoogleApiClient mGoogleApiClient;
 
-    private String date;
-    private String time;
     private int reportNumber;
     private String user;
-    private String location;
     private Double llat;
     private Double llong;
     private String waterCondition;
     private double virusPPM;
     private double contaminantPPM;
 
+
+    private EditText location;
+    private EditText virusLable;
+    private EditText contaminantLabel;
+
     /* values */
     private String[] waterConditions = {"Safe", "Treatable", "Unsafe"};
 
     /* database instance */
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference mDatabase = database.getReference("waterReports");
+    private DatabaseReference mDatabase = database.getReference("waterPurityReports");
+    private DatabaseReference nDatabase = database.getReference("numReportnum");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +69,10 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
         setContentView(R.layout.activity_submit_water_purity_report);
 
         fromUsername = getIntent().getStringExtra("username");
-
+        user = fromUsername;
+        location = (EditText) findViewById(R.id.location);
+        virusLable = (EditText) findViewById(R.id.virusPPM);
+        contaminantLabel = (EditText) findViewById(R.id.contaminantPPM);
 
         waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
         ArrayAdapter<String> waterConditionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, waterConditions);
@@ -77,19 +87,36 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
+                    nDatabase.addValueEventListener(new ValueEventListener() {
+                        /**
+                         * get data from firebase based on user-specific id and set them to textfields and
+                         * spinners on page
+                         */
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            int post = dataSnapshot.getValue(int.class);
+                            reportNumber = post;
+                            reportNumber++;
+                        }
+
+                        /**
+                         * necessary method required for firebase
+                         */
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    virusPPM = Double.parseDouble(virusLable.getText().toString());
+                    contaminantPPM = Double.parseDouble(contaminantLabel.getText().toString());
+
+                    nDatabase.setValue(reportNumber);
                     getLatLongFromAddress(location.getText().toString());
-                    // if successful entry, alert user
-                    if (submitReport(
-                            location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
-                            waterConditionSpinner.getSelectedItem().toString(), latitude, longitude)) {
-                        alertMessage("Succesful Entry", "Thank you for reporting.");
-                        Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
-                        i.putExtra("username", fromUsername);
-                        startActivity(i);
-                        // if error in entry, alert user
-                    } else {
-                        alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
-                    }
+                    submitReport(reportNumber, user,location.getText().toString(), llat, llong,
+                            waterConditionSpinner.getSelectedItem().toString(), virusPPM, contaminantPPM);
+                    Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
+                    i.putExtra("username", fromUsername);
+                    startActivity(i);
                 }
             }
         });
@@ -107,9 +134,6 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
                 startActivity(i);
             }
         });
-
-        buildGoogleApiClient();
-
     }
 
     private void getLatLongFromAddress(String address)
@@ -118,8 +142,8 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
         try
         {
             List<Address> addresses = geoCoder.getFromLocationName(address , 1);
-            latitude = addresses.get(0).getLatitude();
-            longitude = addresses.get(0).getLongitude();
+            llat = addresses.get(0).getLatitude();
+            llong = addresses.get(0).getLongitude();
         }
         catch(Exception e)
         {
@@ -128,43 +152,17 @@ public class SubmitWaterPurityReport extends AppCompatActivity implements Connec
     }
 
 
-    /**
-     * Builds a GoogleApiClient. Uses the addApi() method to request the LocationServices API.
-     */
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-        if (mGoogleApiClient.isConnected()) {
-            System.out.println("Connected1");
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
 
     /**
      * Actual process of communicating with Firebase to submit report
      * @return boolean determines successful submitting report
      */
-    private boolean submitReport(String date, String time, int reportNumber,
+    private boolean submitReport(int reportNumber,
                                       String user, String location, double llat, double llong,
                                       String waterCondition, double virusPPM, double contaminantPPM) {
 
-        WaterPurityReport wr = new WaterPurityReport(date, time, reportNumber, user ,location, llat, llong, waterCondition, virusPPM, contaminantPPM);
+        WaterPurityReport wr = new WaterPurityReport(reportNumber, user ,location, llat, llong, waterCondition, virusPPM, contaminantPPM);
         mDatabase.child(location).setValue(wr);
         return true;
     }
