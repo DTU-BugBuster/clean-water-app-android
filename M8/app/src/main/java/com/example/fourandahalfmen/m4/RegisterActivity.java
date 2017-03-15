@@ -94,8 +94,10 @@ public class RegisterActivity extends Activity {
             public void onClick(View c) {
                 username.setText("");
                 password.setText("");
-                Intent i = new Intent(RegisterActivity.this, WelcomeActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(RegisterActivity.this, WelcomeActivity.class);
+//                startActivity(i);
+                finish();
+                onBackPressed();
             }
         });
     }
