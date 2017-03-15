@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -97,6 +98,7 @@ public class HomePageActivity extends Activity {
             }
         });
 
+        Log.d("User", fromUsername);
 
         String reflocation = "users/" + fromUsername;
         DatabaseReference ref = database.getReference(reflocation);
@@ -108,6 +110,8 @@ public class HomePageActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Users post = dataSnapshot.getValue(Users.class);
+                Log.d("Password", post.password);
+
                 password.setText(post.password);
                 email.setText(post.email);
                 userAdapter.getPosition(post.account_type.toString());

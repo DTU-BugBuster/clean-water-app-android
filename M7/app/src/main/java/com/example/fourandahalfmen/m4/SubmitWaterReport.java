@@ -94,6 +94,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
                             waterConditionSpinner.getSelectedItem().toString(), latitude, longitude)) {
                         alertMessage("Succesful Entry", "Thank you for reporting.");
                         Intent i = new Intent(SubmitWaterReport.this, HomePageActivity.class);
+                        i.putExtra("username", fromUsername);
                         startActivity(i);
                         // if error in entry, alert user
                     } else {
