@@ -128,10 +128,12 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
          */
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View c) {
-                Log.i("clicks", "You clicked the submit button.");
-                Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
-                i.putExtra("username", fromUsername);
-                startActivity(i);
+//                Log.i("clicks", "You clicked the submit button.");
+//                Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
+//                i.putExtra("username", fromUsername);
+//                startActivity(i);
+                finish();
+                onBackPressed();
             }
         });
     }

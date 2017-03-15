@@ -86,7 +86,7 @@ public class HomePageActivity_Worker extends Activity {
         submitWaterPurity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if click on this button, send submitwaterpurity activity
-                Intent i = new Intent(HomePageActivity_Worker.this, SubmitWaterReport.class);
+                Intent i = new Intent(HomePageActivity_Worker.this, SubmitWaterPurityReport.class);
                 i.putExtra("username", fromUsername);
                 startActivity(i);
             }
