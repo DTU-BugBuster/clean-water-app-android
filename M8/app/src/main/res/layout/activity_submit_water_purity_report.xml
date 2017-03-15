@@ -80,7 +80,7 @@
             android:layout_marginTop="41dp" />
 
         <TextView
-            android:id="@+id/contaminantPPM"
+            android:id="@+id/contaminantPPMtextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -93,12 +93,12 @@
             android:id="@+id/contaminantPPM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:layout_marginBottom="28dp"
             android:layout_above="@+id/cancelButtonWR"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="28dp"
+            android:ems="10"
+            android:inputType="number" />
 
         <Button
             android:id="@+id/submitButton"
