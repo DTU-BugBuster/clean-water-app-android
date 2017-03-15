@@ -40,7 +40,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
     private String waterCondition;
     private double virusPPM;
     private double contaminantPPM;
-
+    private String locationName;
 
     private EditText location;
     private EditText virusLable;
@@ -52,7 +52,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
     /* database instance */
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabase = database.getReference("waterPurityReports");
-    private DatabaseReference nDatabase = database.getReference("numReportnum");
+    private DatabaseReference nDatabase = database.getReference("numReportNum");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +102,9 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
                     contaminantPPM = Double.parseDouble(contaminantLabel.getText().toString());
 
                     nDatabase.setValue(reportNumber);
+                    locationName = location.getText().toString();
                     getLatLongFromAddress(location.getText().toString());
-                    submitReport(reportNumber, user,location.getText().toString(), llat, llong,
+                    submitReport(reportNumber, user,locationName, llat, llong,
                             waterConditionSpinner.getSelectedItem().toString(), virusPPM, contaminantPPM);
                     Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
                     i.putExtra("username", fromUsername);
@@ -156,7 +157,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
                                       String waterCondition, double virusPPM, double contaminantPPM) {
 
         WaterPurityReport wr = new WaterPurityReport(reportNumber, user ,location, llat, llong, waterCondition, virusPPM, contaminantPPM);
-        mDatabase.child(location).setValue(wr);
+        mDatabase.child(locationName).setValue(wr);
         return true;
     }
 
