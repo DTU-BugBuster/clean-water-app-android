@@ -64,6 +64,7 @@ public class HomePageActivity_Worker extends Activity {
         state = (EditText) findViewById(R.id.editStateHP);
         zip_code = (EditText) findViewById(R.id.editZipHP);
 
+
         logout = (Button) findViewById(R.id.logout_button);
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
