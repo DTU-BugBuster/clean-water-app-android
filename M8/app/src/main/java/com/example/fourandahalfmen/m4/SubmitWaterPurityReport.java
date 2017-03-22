@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -103,6 +104,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
 
                     nDatabase.setValue(reportNumber);
                     locationName = location.getText().toString();
+                    Log.d("Hi", locationName);
                     getLatLongFromAddress(location.getText().toString());
                     submitReport(reportNumber, user,locationName, llat, llong,
                             waterConditionSpinner.getSelectedItem().toString(), virusPPM, contaminantPPM);
@@ -153,10 +155,10 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
      * @return boolean determines successful submitting report
      */
     private boolean submitReport(int reportNumber,
-                                      String user, String location, double llat, double llong,
+                                      String user, String locationName, double llat, double llong,
                                       String waterCondition, double virusPPM, double contaminantPPM) {
 
-        WaterPurityReport wr = new WaterPurityReport(reportNumber, user ,location, llat, llong, waterCondition, virusPPM, contaminantPPM);
+        WaterPurityReport wr = new WaterPurityReport(reportNumber, user, locationName, llat, llong, waterCondition, virusPPM, contaminantPPM);
         mDatabase.child(locationName).setValue(wr);
         return true;
     }
