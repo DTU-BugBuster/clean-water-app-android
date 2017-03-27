@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.fourandahalfmen.m4.data.WaterPurityReport;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,17 +27,14 @@ import java.util.Locale;
 public class SubmitWaterPurityReport extends AppCompatActivity {
 
     /* instance variables */
-    private String fromUsername;
     private Spinner waterConditionSpinner;
     private Button submitButton;
     private Button cancelButton;
-    protected GoogleApiClient mGoogleApiClient;
 
     private int reportNumber;
     private String user;
     private Double llat;
     private Double llong;
-    private String waterCondition;
     private double virusPPM;
     private double contaminantPPM;
     private String locationName;
@@ -60,8 +56,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_water_purity_report);
 
-        fromUsername = getIntent().getStringExtra("username");
-        user = fromUsername;
+        user = getIntent().getStringExtra("username");
         location = (EditText) findViewById(R.id.location);
         virusLable = (EditText) findViewById(R.id.virusPPM);
         contaminantLabel = (EditText) findViewById(R.id.contaminantPPM);
@@ -75,6 +70,7 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // If fields are empty, display an error.
+                Log.d("Sup", location.getText().toString());
                 if (location.getText().toString() == "") {
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
@@ -99,17 +95,20 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
 
                         }
                     });
+
                     virusPPM = Double.parseDouble(virusLable.getText().toString());
                     contaminantPPM = Double.parseDouble(contaminantLabel.getText().toString());
-
                     nDatabase.setValue(reportNumber);
+
                     locationName = location.getText().toString();
-                    Log.d("Hi", locationName);
-                    getLatLongFromAddress(location.getText().toString());
+                    Log.d("Hi", locationName + " " + virusPPM + " " + contaminantPPM);
+
+                    getLatLongFromAddress(locationName);
+
                     submitReport(reportNumber, user,locationName, llat, llong,
                             waterConditionSpinner.getSelectedItem().toString(), virusPPM, contaminantPPM);
-                    Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity.class);
-                    i.putExtra("username", fromUsername);
+                    Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity_Worker.class);
+                    i.putExtra("username", user);
                     startActivity(i);
                 }
             }
@@ -155,8 +154,8 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
      * @return boolean determines successful submitting report
      */
     private boolean submitReport(int reportNumber,
-                                      String user, String locationName, double llat, double llong,
-                                      String waterCondition, double virusPPM, double contaminantPPM) {
+                                      String user, String locationName, Double llat, Double llong,
+                                      String waterCondition, Double virusPPM, Double contaminantPPM) {
 
         WaterPurityReport wr = new WaterPurityReport(reportNumber, user, locationName, llat, llong, waterCondition, virusPPM, contaminantPPM);
         mDatabase.child(locationName).setValue(wr);

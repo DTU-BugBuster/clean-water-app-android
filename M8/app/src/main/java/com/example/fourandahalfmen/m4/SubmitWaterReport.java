@@ -3,10 +3,10 @@ package com.example.fourandahalfmen.m4;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.LocationListener;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,21 +17,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.WaterReport;
-import com.google.android.gms.location.LocationRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import android.location.Location;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
-import android.location.Geocoder;
-import android.location.Address;
-import java.util.Locale;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
+import java.util.Locale;
 
 public class SubmitWaterReport extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -43,13 +38,9 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
     private Button submitButton;
     private Button cancelButton;
     protected GoogleApiClient mGoogleApiClient;
-    protected Location mLastLocation;
-    protected TextView mLatitudeText;
-    protected TextView mLongitudeText;
     private Double latitude;
     private Double longitude;
     private static final String TAG = "SubmitWaterReport";
-    private final int LOCATION_PERMISSION_REQUEST_CODE = 123;
 
     /* values */
     private String[] waterTypes = {"Bottled", "Well", "Stream", "Lake", "Spring", "Other"};
@@ -87,8 +78,9 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
+                    //using GeoCoder to find lat and long from passed in address
                     getLatLongFromAddress(location.getText().toString());
-                    // if successful entry, alert user
+                    // if successful entry, alert user, ATTEMPTING TO SUBMIT OBJECT TO DB
                     if (submitReport(
                             location.getText().toString(), waterTypeSpinner.getSelectedItem().toString(),
                             waterConditionSpinner.getSelectedItem().toString(), latitude, longitude)) {
@@ -124,6 +116,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
 
     }
 
+    //Geocoder will find lat and long based off of address
     private void getLatLongFromAddress(String address)
     {
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
@@ -156,7 +149,7 @@ public class SubmitWaterReport extends AppCompatActivity implements ConnectionCa
         super.onStart();
         mGoogleApiClient.connect();
         if (mGoogleApiClient.isConnected()) {
-            System.out.println("Connected1");
+            Log.d("Hello", "Connected1");
         }
     }
 

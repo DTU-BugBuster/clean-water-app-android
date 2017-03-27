@@ -72,12 +72,12 @@
             android:id="@+id/virusPPM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:layout_below="@+id/waterConditionSpinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="41dp" />
+            android:layout_below="@+id/waterConditionSpinner"
+            android:layout_marginTop="41dp"
+            android:ems="10"
+            android:inputType="number|numberDecimal" />
 
         <TextView
             android:id="@+id/contaminantPPMtextView"
@@ -98,7 +98,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="28dp"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number|numberDecimal" />
 
         <Button
             android:id="@+id/submitButton"
@@ -110,7 +110,6 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="57dp"
             android:layout_marginStart="57dp"
-            android:onClick="onSubmitClick (SubmitWaterReport)"
             android:text="Submit" />
 
         <Button

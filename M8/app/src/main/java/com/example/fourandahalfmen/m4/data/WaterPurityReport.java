@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class WaterPurityReport {
 
-    private String date;
-    private int reportNumber;
-    private String user;
-    private String location;
-    private Double llat;
-    private Double llong;
-    private String waterCondition;
-    private double virusPPM;
-    private double contaminantPPM;
+    public String date;
+    public int reportNumber;
+    public String user;
+    public String location;
+    public Double llat;
+    public Double llong;
+    public String waterCondition;
+    public Double virusPPM;
+    public Double contaminantPPM;
 
 
     /**
@@ -27,8 +27,8 @@ public class WaterPurityReport {
      * @param contaminantPPM contaminantPPM  - Parts Per Million
      */
     public WaterPurityReport(int reportNumber,
-                             String user, String location, double llat, double llong,
-                             String waterCondition, double virusPPM, double contaminantPPM) {
+                             String user, String location, Double llat, Double llong,
+                             String waterCondition, Double virusPPM, Double contaminantPPM) {
 
         this.date = new Date().toString();
         this.reportNumber = reportNumber;
