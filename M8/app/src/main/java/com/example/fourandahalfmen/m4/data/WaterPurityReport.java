@@ -16,6 +16,14 @@ public class WaterPurityReport {
 
 
     /**
+     * Constructor with no parameters
+     */
+    public WaterPurityReport() {
+        this(0 ,"null", "null", 0.0, 0.0 ,"null", 0.0, 0.0);
+        this.date = new Date().toString();
+    }
+
+    /**
      *
      * @param reportNumber report number
      * @param user workers name

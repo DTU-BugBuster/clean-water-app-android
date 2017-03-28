@@ -75,7 +75,8 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
-                    nDatabase.addValueEventListener(new ValueEventListener() {
+                    DatabaseReference ref = database.getReference("numReportNum");
+                    ref.addValueEventListener(new ValueEventListener() {
                         /**
                          * get data from firebase based on user-specific id and set them to textfields and
                          * spinners on page
@@ -84,7 +85,9 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             int post = dataSnapshot.getValue(int.class);
                             reportNumber = post;
-                            reportNumber++;
+                            reportNumber = reportNumber + 1;
+                            String numberAsString = String.valueOf(reportNumber);
+                            Log.d("Report", numberAsString);
                         }
 
                         /**

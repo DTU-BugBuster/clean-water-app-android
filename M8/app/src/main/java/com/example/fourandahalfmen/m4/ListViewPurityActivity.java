@@ -53,7 +53,7 @@ public class ListViewPurityActivity extends Activity {
                                     int position, long id) {
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                Intent i = new Intent(ListViewPurityActivity.this, ViewIndividualReport.class);
+                Intent i = new Intent(ListViewPurityActivity.this, ViewIndividualPurityReport.class);
                 i.putExtra("key", itemValue);
                 startActivity(i);
             }

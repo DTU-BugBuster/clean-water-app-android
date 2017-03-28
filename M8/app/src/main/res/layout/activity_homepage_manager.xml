@@ -189,6 +189,49 @@
                 android:layout_marginTop="18dp"
                 android:layout_below="@+id/views_text"
                 android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="Submit Water Purity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/views_waterPurityText"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="25dp"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+
+            <Button
+                android:id="@+id/submit_WaterPurity"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit Water Purity"
+                android:textStyle="bold"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/views_waterPurityText"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="View Water Purity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/views_waterText1"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="25dp"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+
+            <Button
+                android:id="@+id/views_WaterPurity"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Water Avaiability"
+                android:textStyle="bold"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/views_text"
+                android:layout_centerHorizontal="true" />
+
         </LinearLayout>
 
     </ScrollView>
