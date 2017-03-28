@@ -97,7 +97,7 @@ public class HomePageActivity_Worker extends Activity {
         viewReports.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if click on this button, send ListViewactivity activity
-                Intent i = new Intent(HomePageActivity_Worker.this, ListViewActivity.class);
+                Intent i = new Intent(HomePageActivity_Worker.this, ListViewAvailabilityActivity.class);
                 startActivity(i);
             }
         });

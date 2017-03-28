@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListViewActivity"
+            android:name=".ListViewAvailabilityActivity"
             android:label="M4" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by varunballari on 3/2/17.
  */
 
-public class ListViewActivity extends Activity {
+public class ListViewAvailabilityActivity extends Activity {
     ListView listView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference ref = database.getReference("waterReports");
@@ -50,7 +50,7 @@ public class ListViewActivity extends Activity {
                                     int position, long id) {
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                Intent i = new Intent(ListViewActivity.this, ViewIndividualReport.class);
+                Intent i = new Intent(ListViewAvailabilityActivity.this, ViewIndividualReport.class);
                 i.putExtra("key", itemValue);
                 startActivity(i);
             }
