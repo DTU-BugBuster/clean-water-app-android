@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,7 +39,7 @@ public class HomePageActivity_Manager extends Activity {
     private Button save;
     private Button viewReports;
     private Button viewWaterAvailability;
-    private Button submitWaterPurity;
+//    private Button submitWaterPurity;
 
 
     /* database instance */
@@ -52,17 +53,22 @@ public class HomePageActivity_Manager extends Activity {
         setContentView(R.layout.activity_homepage_manager);
         fromUsername = getIntent().getStringExtra("username");
 
+        Log.d("Sup", "here1");
+
         userSpinner = (Spinner) findViewById(R.id.userSpinner);
         final ArrayAdapter<String> userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(userAdapter);
 
-        password = (EditText) findViewById(R.id.editPasswordHP);
-        email = (EditText) findViewById(R.id.editEmailHP);
-        street_address = (EditText) findViewById(R.id.editStreetHP);
-        city = (EditText) findViewById(R.id.editCityHP);
-        state = (EditText) findViewById(R.id.editStateHP);
-        zip_code = (EditText) findViewById(R.id.editZipHP);
+        password = (EditText) findViewById(R.id.editPassword);
+        email = (EditText) findViewById(R.id.editEmail);
+        street_address = (EditText) findViewById(R.id.editStreet);
+        city = (EditText) findViewById(R.id.editCity);
+        state = (EditText) findViewById(R.id.editStreet);
+        zip_code = (EditText) findViewById(R.id.editZip);
+
+        Log.d("Sup", "here2");
+
 
         logout = (Button) findViewById(R.id.logout_button);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -81,16 +87,16 @@ public class HomePageActivity_Manager extends Activity {
                 startActivity(i);
             }
         });
-
-        submitWaterPurity = (Button) findViewById(R.id.submit_WaterPurity);
-        submitWaterPurity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // if click on this button, send submitwaterreport activity
-                Intent i = new Intent(HomePageActivity_Manager.this, SubmitWaterPurityReport.class);
-                i.putExtra("username", fromUsername);
-                startActivity(i);
-            }
-        });
+//
+//        submitWaterPurity = (Button) findViewById(R.id.submit_WaterPurity);
+//        submitWaterPurity.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // if click on this button, send submitwaterreport activity
+//                Intent i = new Intent(HomePageActivity_Manager.this, SubmitWaterPurityReport.class);
+//                i.putExtra("username", fromUsername);
+//                startActivity(i);
+//            }
+//        });
 
         viewReports = (Button) findViewById(R.id.views_all_reports);
         viewReports.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +118,7 @@ public class HomePageActivity_Manager extends Activity {
 
 
         String reflocation = "users/" + fromUsername;
+        Log.d("reflocation", reflocation);
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
             /**
@@ -120,7 +127,10 @@ public class HomePageActivity_Manager extends Activity {
              */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 Users post = dataSnapshot.getValue(Users.class);
+                Log.d("reflocation", post.password);
+
                 password.setText(post.password);
                 email.setText(post.email);
                 userAdapter.getPosition(post.account_type.toString());
@@ -162,6 +172,8 @@ public class HomePageActivity_Manager extends Activity {
             }
         });
     }
+
+
 
     /**
      * update user and push to firebase

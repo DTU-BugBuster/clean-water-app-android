@@ -136,6 +136,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         if (post.account_type.toString().equals("Manager")) {
+                            Log.d("Sup", "here0");
+
                             Intent i = new Intent(LoginActivity.this, HomePageActivity_Manager.class);
                             i.putExtra("username", insertUsername);
                             startActivity(i);

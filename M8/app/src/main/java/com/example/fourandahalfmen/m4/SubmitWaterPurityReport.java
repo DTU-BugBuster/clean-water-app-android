@@ -131,6 +131,10 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
         });
     }
 
+    /**
+     * getting cordinates from address
+     * @param address address of location
+     */
     private void getLatLongFromAddress(String address)
     {
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
