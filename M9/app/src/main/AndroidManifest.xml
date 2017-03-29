@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fourandahalfmen.m4">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="M8"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LoginActivity"
+            android:label="M8" />
+        <activity
+            android:name=".ViewWaterAvailabilityActivity"
+            android:label="M8" />
+        <activity
+            android:name=".ViewIndividualReport"
+            android:label="M8" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="M8" />
+        <activity
+            android:name=".HomePageActivity"
+            android:label="M8" />
+        <activity
+            android:name=".HomePageActivity_Worker"
+            android:label="M8" />
+        <activity
+            android:name=".HomePageActivity_Manager"
+            android:label="M8" />
+        <activity
+            android:name=".HomePageActivity_Admin"
+            android:label="M8" />
+        <activity
+            android:name=".SubmitWaterPurityReport"
+            android:label="M8" />
+        <activity
+            android:name=".ListViewPurityActivity"
+            android:label="M8" />
+        <activity
+            android:name=".ViewIndividualPurityReport"
+            android:label="M8" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:label="M8">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ListViewAvailabilityActivity"
+            android:label="M4" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC-k0mD7OaXAa3NoskSR4mNI5xCqLr6flw" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".SubmitWaterReport" />
+    </application>
+
+</manifest>

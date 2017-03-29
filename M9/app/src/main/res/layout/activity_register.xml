@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"><![CDATA[
+
+
+    android:orientation="vertical"
+    android:layout_width="311dp"
+    android:layout_height="165dp">
+
+
+
+    ]]>
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_below="@+id/editUsername"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_below="@+id/editEmail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/userSpinner"
+        android:layout_below="@+id/editPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Street Address"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_below="@+id/userSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_below="@+id/editStreet"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="State"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_below="@+id/editCity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:id="@+id/editZip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Zip-Code"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_below="@+id/editState"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/createUser"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:textStyle="bold"
+        android:onClick="onCreateClick"
+        android:layout_below="@+id/editZip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/cancel_button_RP"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_below="@+id/createUser"
+        android:textStyle="bold"
+        android:onClick="onCancelClick"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+    />
+
+</RelativeLayout>
