@@ -23,4 +23,6 @@
     <string name="worker">Worker</string>
     <string name="admin">Admin</string>
     <string name="title_activity_view_water_availability">ViewWaterAvailabilityActivity</string>
+    <string name="title_activity_water_quality_history_graph">WaterQualityHistoryGraphActivity
+    </string>
 </resources>
