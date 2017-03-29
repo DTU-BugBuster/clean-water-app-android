@@ -232,6 +232,27 @@
                 android:layout_below="@+id/views_text"
                 android:layout_centerHorizontal="true" />
 
+            <TextView
+                android:id="@+id/waterHistoryGraphLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="40dp"
+                android:text="Water Quality History Graph"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/graphButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/views_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:text="View Graph"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </ScrollView>
