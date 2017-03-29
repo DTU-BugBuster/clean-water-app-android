@@ -41,6 +41,8 @@ public class HomePageActivity_Manager extends Activity {
     private Button viewWaterAvailability;
     private Button submitWaterPurity;
     private Button views_WaterPurity;
+    private Button views_HistoricalReport;
+
 
 
     /* database instance */
@@ -88,6 +90,26 @@ public class HomePageActivity_Manager extends Activity {
                 startActivity(i);
             }
         });
+
+        submitButton = (Button) findViewById(R.id.submit_a_report);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if click on this button, send submitwaterreport activity
+                Intent i = new Intent(HomePageActivity_Manager.this, SubmitWaterReport.class);
+                i.putExtra("username", fromUsername);
+                startActivity(i);
+            }
+        });
+        
+        views_HistoricalReport  = (Button) findViewById(R.id.graphButton);
+        views_HistoricalReport.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(HomePageActivity_Manager.this, SubmitHistoricalReportInfo.class);
+                i.putExtra("username", fromUsername);
+                startActivity(i);
+            }
+        });
+
 //
 //        submitWaterPurity = (Button) findViewById(R.id.submit_WaterPurity);
 //        submitWaterPurity.setOnClickListener(new View.OnClickListener() {
