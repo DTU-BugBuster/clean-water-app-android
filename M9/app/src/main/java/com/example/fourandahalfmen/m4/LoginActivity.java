@@ -84,8 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View c) {
                 username.setText("");
                 password.setText("");
-//                Intent i = new Intent(LoginActivity.this, WelcomeActivity.class);
-//                startActivity(i);
                 finish();
                 onBackPressed();
             }
