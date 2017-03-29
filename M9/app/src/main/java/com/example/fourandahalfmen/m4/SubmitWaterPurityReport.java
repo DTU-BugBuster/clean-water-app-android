@@ -110,9 +110,8 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
 
                     submitReport(reportNumber, user,locationName, llat, llong,
                             waterConditionSpinner.getSelectedItem().toString(), virusPPM, contaminantPPM);
-                    Intent i = new Intent(SubmitWaterPurityReport.this, HomePageActivity_Worker.class);
-                    i.putExtra("username", user);
-                    startActivity(i);
+                    finish();
+                    onBackPressed();
                 }
             }
         });
