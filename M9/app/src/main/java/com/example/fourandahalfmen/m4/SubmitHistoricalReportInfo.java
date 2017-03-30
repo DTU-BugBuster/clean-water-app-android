@@ -18,8 +18,6 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
     private Button cancelButton;
 
     private String user;
-    private double virusPPM;
-    private double contaminantPPM;
     private EditText location;
     private EditText virus;
     private EditText contaminant;
@@ -45,14 +43,14 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
-                    virusPPM = Double.parseDouble(virus.getText().toString());
-                    contaminantPPM = Double.parseDouble(contaminant.getText().toString());
+//                    virusPPM = Double.parseDouble(virus.getText().toString());
+//                    contaminantPPM = Double.parseDouble(contaminant.getText().toString());
                     Intent i = new Intent(SubmitHistoricalReportInfo.this, WaterQualityHistoryGraphActivity.class);
                     i.putExtra("username", user);
                     i.putExtra("location", location.getText().toString());
-                    i.putExtra("virus", virus.getText().toString());
-                    i.putExtra("contaminant", contaminant.getText().toString());
-                    i.putExtra("year", year.getText().toString());
+                    i.putExtra("virus", Double.valueOf(virus.getText().toString()));
+                    i.putExtra("contaminant", Double.valueOf(contaminant.getText().toString()));
+                    i.putExtra("year", Integer.valueOf(year.getText().toString()));
                     startActivity(i);
                     finish();
                     onBackPressed();

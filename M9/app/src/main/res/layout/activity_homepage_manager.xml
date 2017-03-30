@@ -226,11 +226,11 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="View Water Avaiability"
-                android:textStyle="bold"
-                android:layout_marginTop="18dp"
                 android:layout_below="@+id/views_text"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:text="View Water Purity"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/waterHistoryGraphLabel"

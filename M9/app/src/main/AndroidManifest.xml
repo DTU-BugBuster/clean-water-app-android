@@ -22,6 +22,9 @@
             android:name=".ViewWaterAvailabilityActivity"
             android:label="M8" />
         <activity
+            android:name=".SubmitHistoricalReportInfo"
+            android:label="M8" />
+        <activity
             android:name=".ViewIndividualReport"
             android:label="M8" />
         <activity
