@@ -164,7 +164,9 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
                                       String waterCondition, Double virusPPM, Double contaminantPPM) {
 
         WaterPurityReport wr = new WaterPurityReport(reportNumber, user, locationName, llat, llong, waterCondition, virusPPM, contaminantPPM);
-        mDatabase.child(locationName).setValue(wr);
+        int ppm = virusPPM.intValue();
+        String ppmString = "" + ppm;
+        mDatabase.child(locationName + ppmString).setValue(wr);
         return true;
     }
 

@@ -16,6 +16,8 @@ import com.jjoe64.graphview.series.DataPoint;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -23,8 +25,7 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
 
     private String user;
     private String location;
-    private Double virusPPM;
-    private Double contaminantPPM;
+    private String ppmType;
     private int year;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,8 +40,7 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
 
         user = getIntent().getStringExtra("username");
         location = getIntent().getStringExtra("location");
-        virusPPM = getIntent().getDoubleExtra("virus", -1);
-        contaminantPPM = getIntent().getDoubleExtra("contaminant", -1);
+        ppmType = getIntent().getStringExtra("PPM");
         year = getIntent().getIntExtra("year", 0);
 
 
@@ -55,20 +55,49 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
                 graph.setTitle("Water Quality History");
                 graph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
                 graph.getGridLabelRenderer().setVerticalAxisTitle("PPM");
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setMinX(0);
+                graph.getViewport().setMaxX(13);
                 BarGraphSeries<DataPoint> series = new BarGraphSeries<>();
                 ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
 
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
                     WaterPurityReport currentReport = data.getValue(WaterPurityReport.class);
+                    if (Integer.valueOf(currentReport.date.substring(currentReport.date.length() - 4)) == year
+                            && currentReport.location.equals(location)) {
+                        matchingReports.add(currentReport);
+                    }
 
-                    //if month is same, average values
-
-
-                    matchingReports.add(currentReport);
 
                     //check location and year
 
                 }
+                Collections.sort(matchingReports, new Comparator<WaterPurityReport>() {
+                    @Override
+                    public int compare(WaterPurityReport r1, WaterPurityReport r2) {
+                        String stringDate1 = r1.date;
+                        Date formattedDate1 = new Date();
+                        try {
+                            formattedDate1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(stringDate1);
+                        } catch (Exception e) {
+                        }
+
+                        String stringDate2 = r2.date;
+                        Date formattedDate2 = new Date();
+                        try {
+                            formattedDate2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(stringDate2);
+                        } catch (Exception e) {
+                        }
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(formattedDate1);
+                        int m1 = cal.get(Calendar.MONTH);
+                        cal.setTime(formattedDate2);
+                        int m2 = cal.get(Calendar.MONTH);
+
+                        return Integer.compare(m1, m2);
+                    }
+                });
                 for (WaterPurityReport reportPoint : matchingReports) {
 
                     String stringDate = reportPoint.date;
@@ -83,15 +112,14 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
                     int year = cal.get(Calendar.YEAR);
                     int month = cal.get(Calendar.MONTH);
                     double ppm;
-                    ppm = reportPoint.virusPPM;
-//            if (contaminantPPM == -1) {
-//                ppm = virusPPM;
-//            } else {
-//                //use contaminant PPM always
-//                ppm = contaminantPPM;
-//            }
+                    //ppm = reportPoint.virusPPM;
+                    if (ppmType.equals("contaminant")) {
+                        ppm = reportPoint.contaminantPPM;
+                    } else {
+                        ppm = reportPoint.virusPPM;
+                    }
 
-                    series.appendData(new DataPoint(month, ppm), false, 100);
+                    series.appendData(new DataPoint(month + 1, ppm), false, 100);
                     dataPoints.add(new DataPoint(month, ppm));
                 }
                 graph.addSeries(series);

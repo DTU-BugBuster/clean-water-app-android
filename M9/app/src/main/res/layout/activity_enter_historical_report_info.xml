@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:id="@+id/relativeLayout">
 
         <TextView
             android:id="@+id/waterLocation"
@@ -27,93 +28,59 @@
             android:layout_alignParentTop="true"
             android:text="Location of water" />
 
-        <EditText
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/waterLocation"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            tools:text="Enter an address"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Virus PPM"
-            android:layout_marginTop="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/location"
+            android:layout_marginTop="101dp"
+            android:text="PPM" />
+
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            tools:text="Enter an address"
+            android:layout_below="@+id/waterLocation"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <EditText
-            android:id="@+id/virusPPM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number|numberDecimal"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="17dp" />
-
-        <TextView
-            android:id="@+id/contaminantPPMtextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView2"
-            android:layout_marginTop="75dp"
-            android:text="Contaminant PPM" />
-
-        <EditText
-            android:id="@+id/contaminantPPM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number|numberDecimal"
-            android:layout_below="@+id/contaminantPPMtextView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="21dp" />
-
 
         <TextView
             android:id="@+id/viewHistoricalYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="57dp"
             android:text="Year"
-            android:layout_alignTop="@+id/contaminantPPM"
+            android:layout_below="@+id/location"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="19dp" />
 
         <EditText
             android:id="@+id/editTextYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/viewHistoricalYear"
-            android:layout_marginBottom="28dp"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_below="@+id/viewHistoricalYear"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:layout_alignRight="@+id/editTextYear"
-            android:layout_alignEnd="@+id/editTextYear"
-            android:layout_marginRight="62dp"
-            android:layout_marginEnd="62dp"
-            android:layout_below="@+id/editTextYear" />
+            android:layout_below="@+id/textView2"
+            android:layout_toLeftOf="@+id/cancelButtonWR"
+            android:layout_toStartOf="@+id/cancelButtonWR"
+            android:layout_marginRight="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="107dp" />
 
         <Button
             android:id="@+id/cancelButtonWR"
@@ -124,6 +91,28 @@
             android:layout_alignBottom="@+id/submitButton"
             android:layout_toRightOf="@+id/editTextYear"
             android:layout_toEndOf="@+id/editTextYear" />
+
+        <RadioButton
+            android:id="@+id/virusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/relativeLayout"
+            android:layout_marginTop="198dp"
+            android:checked="false"
+            android:duplicateParentState="false"
+            android:text="Virus" />
+
+        <RadioButton
+            android:id="@+id/contaminantButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/virusButton"
+            android:layout_alignBottom="@+id/virusButton"
+            android:layout_toLeftOf="@+id/cancelButtonWR"
+            android:layout_toStartOf="@+id/cancelButtonWR"
+            android:text="Contaminant" />
 
     </RelativeLayout>
 

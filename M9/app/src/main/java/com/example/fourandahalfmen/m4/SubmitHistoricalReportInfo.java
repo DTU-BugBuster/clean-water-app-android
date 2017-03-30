@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 public class SubmitHistoricalReportInfo extends AppCompatActivity {
@@ -19,8 +20,8 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
 
     private String user;
     private EditText location;
-    private EditText virus;
-    private EditText contaminant;
+    private RadioButton virus;
+    private RadioButton contaminant;
     private EditText year;
 
     @Override
@@ -31,8 +32,8 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
         user = getIntent().getStringExtra("username");
 
         location = (EditText) findViewById(R.id.location);
-        virus = (EditText) findViewById(R.id.virusPPM);
-        contaminant = (EditText) findViewById(R.id.contaminantPPM);
+        virus = (RadioButton) findViewById(R.id.virusButton);
+        contaminant = (RadioButton) findViewById(R.id.contaminantButton);
         year = (EditText) findViewById(R.id.editTextYear);
 
         submitButton = (Button) findViewById(R.id.submitButton);
@@ -43,13 +44,14 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
                 } else {
-//                    virusPPM = Double.parseDouble(virus.getText().toString());
-//                    contaminantPPM = Double.parseDouble(contaminant.getText().toString());
                     Intent i = new Intent(SubmitHistoricalReportInfo.this, WaterQualityHistoryGraphActivity.class);
                     i.putExtra("username", user);
                     i.putExtra("location", location.getText().toString());
-                    i.putExtra("virus", Double.valueOf(virus.getText().toString()));
-                    i.putExtra("contaminant", Double.valueOf(contaminant.getText().toString()));
+                    if (!virus.isChecked()) {
+                        i.putExtra("PPM", "contaminant");
+                    } else {
+                        i.putExtra("PPM", "virus");
+                    }
                     i.putExtra("year", Integer.valueOf(year.getText().toString()));
                     startActivity(i);
                     finish();
