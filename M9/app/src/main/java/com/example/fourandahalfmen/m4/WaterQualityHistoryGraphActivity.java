@@ -47,6 +47,7 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             /**
              * get data from firebase and set them to listview
+             * Sets up the graph x and y axis with values associated
              */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

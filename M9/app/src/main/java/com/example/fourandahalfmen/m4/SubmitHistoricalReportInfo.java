@@ -29,6 +29,7 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_historical_report_info);
 
+        //Linked XML resources to code and push the data to next view
         user = getIntent().getStringExtra("username");
 
         location = (EditText) findViewById(R.id.location);
@@ -43,6 +44,7 @@ public class SubmitHistoricalReportInfo extends AppCompatActivity {
                 if (location.getText().toString() == "") {
                     alertMessage("Blank Fields", "Location field is empty. Please fill in all fields.");
 
+                    // Passing through values from form to the graph view in the bundle
                 } else {
                     Intent i = new Intent(SubmitHistoricalReportInfo.this, WaterQualityHistoryGraphActivity.class);
                     i.putExtra("username", user);
