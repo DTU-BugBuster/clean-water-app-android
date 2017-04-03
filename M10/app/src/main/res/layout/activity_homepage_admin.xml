@@ -35,11 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_logout"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="@string/action_logout" />
 
             <EditText
-                android:id="@+id/editPasswordHP"
+                android:id="@+id/editPasswordMan"
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -52,7 +52,7 @@
                 android:maxLines="1" />
 
             <EditText
-                android:id="@+id/editEmailHP"
+                android:id="@+id/editEmailMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -60,7 +60,7 @@
                 android:maxLines="1" />
 
             <Spinner
-                android:id="@+id/userSpinner"
+                android:id="@+id/userSpinnerMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -69,7 +69,7 @@
                 android:layout_marginTop="14dp" />
 
             <EditText
-                android:id="@+id/editStreetHP"
+                android:id="@+id/editStreetMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -80,7 +80,7 @@
                 android:maxLines="1" />
 
             <EditText
-                android:id="@+id/editCityHP"
+                android:id="@+id/editCityMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -91,7 +91,7 @@
                 android:maxLines="1" />
 
             <EditText
-                android:id="@+id/editStateHP"
+                android:id="@+id/editStateMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -102,7 +102,7 @@
                 android:maxLines="1" />
 
             <EditText
-                android:id="@+id/editZipHP"
+                android:id="@+id/editZipMan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -117,142 +117,78 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Save"
+                android:textStyle="bold"
+                android:layout_marginTop="18dp"
                 android:layout_below="@+id/userSpinner"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:onClick="onSaveClick (HomePageActivity)"
-                android:text="Save"
-                android:textStyle="bold" />
+                android:onClick="onSaveClick (HomePageActivity)" />
 
 
             <TextView
-                android:id="@+id/player_name_text"
+                android:text="Submit Report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
+                android:id="@+id/player_name_text"
                 android:layout_marginTop="40dp"
-                android:text="Submit Report"
-                android:textColor="#000000"
-                android:textSize="25sp" />
+                android:layout_marginRight="25dp"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/submit_a_report"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Submit a Report"
+                android:textStyle="bold"
+                android:layout_marginTop="18dp"
                 android:layout_below="@+id/userSpinner"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:onClick="onReportClick (HomePageActivity)"
-                android:text="Submit a Report"
-                android:textStyle="bold" />
+                android:onClick="onReportClick (HomePageActivity)" />
 
             <TextView
-                android:id="@+id/views_text"
+                android:text="View Reports"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
+                android:id="@+id/views_text"
                 android:layout_marginTop="40dp"
-                android:text="View Reports"
-                android:textColor="#000000"
-                android:textSize="25sp" />
+                android:layout_marginRight="25dp"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/views_all_reports"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="View all Reports"
+                android:textStyle="bold"
+                android:layout_marginTop="18dp"
                 android:layout_below="@+id/views_text"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:onClick="onReportClick (ListViewActivity)"
-                android:text="View all Reports"
-                android:textStyle="bold" />
+                android:onClick="onReportClick (ListViewActivity)" />
 
             <TextView
-                android:id="@+id/views_waterText"
+                android:text="View Water Availability"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
+                android:id="@+id/views_waterText"
                 android:layout_marginTop="40dp"
-                android:text="View Water Availability"
-                android:textColor="#000000"
-                android:textSize="25sp" />
+                android:layout_marginRight="25dp"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/views_WaterAvailability"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/views_text"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
                 android:text="View Water Avaiability"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/views_waterPurityText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="40dp"
-                android:text="Submit Water Purity"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-            <Button
-                android:id="@+id/submit_WaterPurity"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/views_waterPurityText"
-                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
                 android:layout_marginTop="18dp"
-                android:text="Submit Water Purity"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/views_waterText1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="40dp"
-                android:text="View Water Purity"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-            <Button
-                android:id="@+id/views_WaterPurity"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/views_text"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:text="View Water Purity"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/waterHistoryGraphLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="40dp"
-                android:text="Water Quality History Graph"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-            <Button
-                android:id="@+id/graphButton"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/views_text"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:text="View Graph"
-                android:textStyle="bold" />
-
+                android:layout_centerHorizontal="true" />
         </LinearLayout>
 
     </ScrollView>
