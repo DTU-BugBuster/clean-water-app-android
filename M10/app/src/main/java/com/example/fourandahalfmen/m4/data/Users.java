@@ -51,6 +51,38 @@ public final class Users {
 
     }
 
+    /**
+     *
+     * @param password
+     * @return
+     */
+    public boolean setPassword(String password) {
 
+        int validSymbols = 0;
+        int capitalLetters = 0;
+        boolean invalidPassowrd = true;
+
+        if (password.length() < 7) {
+            return false;
+        }
+        for (int i = 0; i < password.length(); i++) {
+            char cur = password.charAt(i);
+            if (cur == '!' || cur == '$' || cur == '#' || cur == "@")  {
+                validSymbols++;
+            } else if (Character.isUpperCase(cur)) {
+                capitalLetters++;
+            } else if (cur == '+' || cur == '-' || cur == '%') {
+                return false;
+            }
+        }
+
+        if (validSymbols > 2 && capitalLetters > 0) {
+            this.password = password;
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
 
