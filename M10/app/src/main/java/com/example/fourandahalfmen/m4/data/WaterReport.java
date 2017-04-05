@@ -39,4 +39,6 @@ public class WaterReport {
         this.llat = llat;
         this.llong = llong;
     }
+
+
 }
