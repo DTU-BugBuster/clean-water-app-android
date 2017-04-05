@@ -48,4 +48,30 @@ public class WaterPurityReport {
         this.virusPPM = virusPPM;
         this.contaminantPPM = contaminantPPM;
     }
+
+    /**
+     * Set Virus PPM in report
+     * @param ppm virus ppm
+     * @return whether virusPPM was successfully added
+     */
+    public boolean setVirusPPM(Double ppm) {
+        if (ppm < 0) {
+            return false;
+        }
+        this.virusPPM = ppm;
+        return true;
+    }
+
+    /**
+     * Set Contaminant PPM in report
+     * @param ppm contaminant PPM
+     * @return whehter contaminant PPM was successfully added
+     */
+    public boolean setContaminantPPM(Double ppm) {
+        if (ppm < 0) {
+            return false;
+        }
+        this.contaminantPPM = ppm;
+        return true;
+    }
 }
