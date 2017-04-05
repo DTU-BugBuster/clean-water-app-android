@@ -19,16 +19,16 @@ public class VarunBallariTest {
 
     @Test
     public void addition_isCorrect() throws Exception {
-        assertTrue(varun.setPassword("Hello022!!"));
-        assertFalse(varun.setPassword("Hello"));
-        assertFalse(varun.setPassword("1"));
-        assertFalse(varun.setPassword("hello022!!"));
-        assertTrue(varun.setPassword("HELLO!!$$"));
-        assertFalse(varun.setPassword("Hello022+!!"));
-        assertFalse(varun.setPassword("Hello022-!!"));
-        assertFalse(varun.setPassword("H1113333%"));
-        assertTrue(varun.setPassword("H1113333!"));
+        assertTrue(varun.setUsername("HEllo"));
+        assertFalse(varun.setUsername("HEll1"));
+        assertFalse(varun.setUsername("Hello"));
+        assertTrue(varun.setUsername("HEllobbbbbbbbbb"));
+        assertFalse(varun.setUsername("HEllo$"));
+        assertFalse(varun.setUsername("hello"));
+        assertFalse(varun.setUsername("1333"));
+        assertFalse(varun.setUsername("HELlo"));
     }
+
 
 
     /**
@@ -37,11 +37,11 @@ public class VarunBallariTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNull() {
-        varun.setPassword(null);
+        varun.setUsername(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testEmpty() {
-        varun.setPassword("");
+        varun.setUsername("");
     }
 }
