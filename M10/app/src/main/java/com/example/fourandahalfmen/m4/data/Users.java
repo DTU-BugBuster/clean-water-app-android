@@ -67,7 +67,7 @@ public final class Users {
         }
         for (int i = 0; i < password.length(); i++) {
             char cur = password.charAt(i);
-            if (cur == '!' || cur == '$' || cur == '#' || cur == "@")  {
+            if (cur == '!' || cur == '$' || cur == '#' || cur == '@')  {
                 validSymbols++;
             } else if (Character.isUpperCase(cur)) {
                 capitalLetters++;
