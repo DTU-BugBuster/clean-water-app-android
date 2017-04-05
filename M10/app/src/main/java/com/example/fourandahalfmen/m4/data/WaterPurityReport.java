@@ -55,6 +55,10 @@ public class WaterPurityReport {
      * @return whether virusPPM was successfully added
      */
     public boolean setVirusPPM(Double ppm) {
+        if (ppm == null) {
+            throw new IllegalArgumentException("Virus PPM value is null.");
+        }
+
         if (ppm < 0) {
             return false;
         }
@@ -68,6 +72,10 @@ public class WaterPurityReport {
      * @return whehter contaminant PPM was successfully added
      */
     public boolean setContaminantPPM(Double ppm) {
+        if (ppm == null) {
+            throw new IllegalArgumentException("Contaminant PPM value is null.");
+        }
+
         if (ppm < 0) {
             return false;
         }
