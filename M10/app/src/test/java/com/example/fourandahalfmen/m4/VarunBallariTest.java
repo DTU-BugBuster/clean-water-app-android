@@ -18,7 +18,7 @@ public class VarunBallariTest {
     Users varun = new Users();
 
     @Test
-    public void addition_isCorrect() throws Exception {
+    public void username_isCorrect() throws Exception {
         assertTrue(varun.setUsername("HEllo"));
         assertFalse(varun.setUsername("HEll1"));
         assertFalse(varun.setUsername("Hello"));

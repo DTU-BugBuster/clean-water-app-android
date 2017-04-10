@@ -118,8 +118,8 @@ public class SubmitWaterPurityReport extends AppCompatActivity {
 
         cancelButton = (Button) findViewById(R.id.cancelButtonWR);
 
-        /**
-         * If cancel button is clicked, goes back to welcome screen.
+        /*
+          If cancel button is clicked, goes back to welcome screen.
          */
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View c) {

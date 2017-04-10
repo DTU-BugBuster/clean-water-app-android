@@ -18,16 +18,16 @@ public class JakeWaldnerTest {
     Users jake = new Users();
 
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertTrue(jake.setEmail("Hello022!!"));
-        assertFalse(jake.setEmail("Hello"));
-        assertFalse(jake.setEmail("1"));
-        assertFalse(jake.setEmail("hello022!!"));
-        assertTrue(jake.setEmail("HELLO!!$$"));
-        assertFalse(jake.setEmail("Hello022+!!"));
-        assertFalse(jake.setEmail("Hello022-!!"));
-        assertFalse(jake.setEmail("H1113333%"));
-        assertTrue(jake.setEmail("H1113333!"));
+    public void email_isCorrect() throws Exception {
+        assertTrue(jake.setEmail("jake@waldner.com"));
+        assertFalse(jake.setEmail("jake"));
+        assertFalse(jake.setEmail("jake@"));
+        assertFalse(jake.setEmail("jake!"));
+        assertTrue(jake.setEmail("jake123@waldner.edu"));
+        assertFalse(jake.setEmail("jake123@waldner.edcation"));
+        assertFalse(jake.setEmail("@waldner.edcation"));
+        assertFalse(jake.setEmail("jake."));
+        assertTrue(jake.setEmail("1@2.com"));
     }
 
 

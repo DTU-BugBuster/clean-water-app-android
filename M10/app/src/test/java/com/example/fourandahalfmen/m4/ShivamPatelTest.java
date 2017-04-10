@@ -17,7 +17,7 @@ public class ShivamPatelTest {
     Users shivam = new Users();
 
     @Test
-    public void addition_isCorrect() throws Exception {
+    public void password_isCorrect() throws Exception {
         assertTrue(shivam.setPassword("Hello022!!"));
         assertFalse(shivam.setPassword("Hello"));
         assertFalse(shivam.setPassword("1"));
