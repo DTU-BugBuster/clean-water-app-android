@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.WaterPurityReport;
-import com.example.fourandahalfmen.m4.data.WaterReport;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,14 +36,14 @@ public class ViewIndividualPurityReport extends Activity {
         setContentView(R.layout.activity_view_report_individual);
         fromKey = getIntent().getStringExtra("key");
 
-        viewDate = (TextView) findViewById(R.id.viewDate);
-        viewLocation = (TextView) findViewById(R.id.viewLocation);
-        viewWaterCondition = (TextView) findViewById(R.id.viewWaterCondition);
+        viewDate = (TextView) findViewById(R.id.email);
+        viewLocation = (TextView) findViewById(R.id.city);
+        viewWaterCondition = (TextView) findViewById(R.id.password);
         viewContaminantPPM = (TextView) findViewById(R.id.viewContaminantPPM);
         viewVirusPPM = (TextView) findViewById(R.id.viewVirusPPM);
-        viewUser = (TextView) findViewById(R.id.viewUser);
+        viewUser = (TextView) findViewById(R.id.username);
         viewLat = (TextView) findViewById(R.id.viewLat);
-        viewLong = (TextView) findViewById(R.id.viewLong);
+        viewLong = (TextView) findViewById(R.id.account_type);
         viewReportNumber = (TextView) findViewById(R.id.viewReportNumber);
 
 

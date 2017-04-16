@@ -1,19 +1,15 @@
 package com.example.fourandahalfmen.m4;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.fourandahalfmen.m4.data.Users;
 import com.example.fourandahalfmen.m4.data.WaterReport;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by varunballari on 3/2/17.
@@ -38,13 +34,13 @@ public class ViewIndividualReport extends Activity {
         setContentView(R.layout.activity_view_report_individual);
         fromKey = getIntent().getStringExtra("key");
 
-        viewDate = (TextView) findViewById(R.id.viewDate);
-        viewLocation = (TextView) findViewById(R.id.viewLocation);
-        viewWaterCondition = (TextView) findViewById(R.id.viewWaterCondition);
-        viewWaterType = (TextView) findViewById(R.id.viewWaterType);
-        viewUser = (TextView) findViewById(R.id.viewUser);
+        viewDate = (TextView) findViewById(R.id.email);
+        viewLocation = (TextView) findViewById(R.id.city);
+        viewWaterCondition = (TextView) findViewById(R.id.password);
+        viewWaterType = (TextView) findViewById(R.id.locked);
+        viewUser = (TextView) findViewById(R.id.username);
         viewLat = (TextView) findViewById(R.id.viewLat);
-        viewLong = (TextView) findViewById(R.id.viewLong);
+        viewLong = (TextView) findViewById(R.id.account_type);
 
 
         String reflocation =  "waterReports/" + fromKey.toString();

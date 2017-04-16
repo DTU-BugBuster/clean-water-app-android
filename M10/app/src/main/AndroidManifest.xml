@@ -14,46 +14,82 @@
         android:icon="@mipmap/ic_launcher"
         android:label="M8"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".LoginActivity"
-            android:label="M8" />
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".ViewWaterAvailabilityActivity"
-            android:label="M8" />
+            android:label="M8"
+            />
         <activity
             android:name=".SubmitHistoricalReportInfo"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".ViewIndividualReport"
-            android:label="M8" />
+            android:label="M8"
+            />
         <activity
             android:name=".RegisterActivity"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".HomePageActivity"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".HomePageActivity_Worker"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".HomePageActivity_Manager"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".HomePageActivity_Admin"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
+
         <activity
             android:name=".SubmitWaterPurityReport"
-            android:label="M8" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".ListViewPurityActivity"
-            android:label="M8" />
+            android:label="M8"
+            />
+        <activity
+            android:name=".ViewIndividualSecurityReport"
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
+        <activity
+            android:name=".ViewIndividualUser"
+            android:label="M8"
+            />
+        <activity
+            android:name=".ListViewSecurityActivity"
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
+        <activity
+            android:name=".ListViewUsersActivity"
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".ViewIndividualPurityReport"
-            android:label="M8" />
+            android:label="M8"
+            />
         <activity
-            android:name=".WelcomeActivity"
-            android:label="M8">
+            android:name="LoginActivity"
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,7 +98,14 @@
         </activity>
         <activity
             android:name=".ListViewAvailabilityActivity"
-            android:label="M4" />
+            android:label="M8"
+            />
+        <activity android:name=".SubmitWaterReport"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".WaterQualityHistoryGraphActivity"
+            android:label="M8"
+            />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -77,11 +120,5 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SubmitWaterReport" />
-        <activity
-            android:name=".WaterQualityHistoryGraphActivity"
-            android:label="M8"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 </manifest>

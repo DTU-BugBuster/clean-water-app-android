@@ -28,7 +28,6 @@ public class RegisterActivity extends Activity {
     private EditText state;
     private EditText zip_code;
     private Button onCreateUser;
-    private Button cancelButton;
 
 
     /* values */
@@ -42,7 +41,7 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_signup);
 
         username = (EditText) findViewById(R.id.editUsername);
         password = (EditText) findViewById(R.id.editPassword);
@@ -82,22 +81,6 @@ public class RegisterActivity extends Activity {
                         alertMessage("Incorrect Types", "Make sure zip is all numbers and email is valid.");
                     }
                 }
-            }
-        });
-
-        cancelButton = (Button) findViewById(R.id.cancel_button_RP);
-
-        /**
-         * If cancel button is clicked, goes back to welcome screen.
-         */
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View c) {
-                username.setText("");
-                password.setText("");
-//                Intent i = new Intent(RegisterActivity.this, WelcomeActivity.class);
-//                startActivity(i);
-                finish();
-                onBackPressed();
             }
         });
     }
