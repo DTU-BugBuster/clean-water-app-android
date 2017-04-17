@@ -2,6 +2,7 @@ package com.example.fourandahalfmen.m4;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.WaterPurityReport;
@@ -33,7 +34,7 @@ public class ViewIndividualPurityReport extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_report_individual);
+        setContentView(R.layout.activity_view_purity_report_individual);
         fromKey = getIntent().getStringExtra("key");
 
         viewDate = (TextView) findViewById(R.id.email);
@@ -60,13 +61,15 @@ public class ViewIndividualPurityReport extends Activity {
                 WaterPurityReport post = dataSnapshot.getValue(WaterPurityReport.class);
                 viewDate.setText(post.date.toString());
                 viewLocation.setText(post.location.toString());
-                viewContaminantPPM.setText(post.contaminantPPM.toString());
-                viewVirusPPM.setText(post.virusPPM.toString());
+                viewContaminantPPM.setText(String.valueOf(post.contaminantPPM));
+                viewVirusPPM.setText(String.valueOf(post.virusPPM));
+                Log.d("Here", "Error happens here");
                 viewWaterCondition.setText(post.waterCondition.toString());
                 viewUser.setText(post.user.toString());
-                viewLat.setText(post.llat.toString());
-                viewLong.setText(post.llong.toString());
-                viewReportNumber.setText(post.reportNumber);
+                viewLat.setText(String.valueOf(post.llat));
+                viewLong.setText(String.valueOf(post.llong));
+                viewReportNumber.setText(String.valueOf(post.reportNumber));
+                Log.d("Here2", "Error happens here2");
 
             }
             /**

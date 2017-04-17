@@ -62,7 +62,8 @@
         <activity
             android:name=".ListViewPurityActivity"
             android:label="M8"
-            />
+            android:theme="@style/AppTheme.Dark"
+        />
         <activity
             android:name=".ViewIndividualSecurityReport"
             android:label="M8"
@@ -71,7 +72,8 @@
         <activity
             android:name=".ViewIndividualUser"
             android:label="M8"
-            />
+            android:theme="@style/AppTheme.Dark"
+        />
         <activity
             android:name=".ListViewSecurityActivity"
             android:label="M8"
@@ -85,6 +87,7 @@
         <activity
             android:name=".ViewIndividualPurityReport"
             android:label="M8"
+            android:theme="@style/AppTheme.Dark"
             />
         <activity
             android:name="LoginActivity"
@@ -99,13 +102,16 @@
         <activity
             android:name=".ListViewAvailabilityActivity"
             android:label="M8"
-            />
+            android:theme="@style/AppTheme.Dark"
+        />
         <activity android:name=".SubmitWaterReport"
-            android:theme="@style/AppTheme.Dark" />
+            android:label="M8"
+            android:theme="@style/AppTheme.Dark"
+            />
         <activity
             android:name=".WaterQualityHistoryGraphActivity"
             android:label="M8"
-            />
+        />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
