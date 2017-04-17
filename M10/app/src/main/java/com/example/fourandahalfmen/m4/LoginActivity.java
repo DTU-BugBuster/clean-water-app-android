@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.fourandahalfmen.m4.data.LoginReports;
 import com.example.fourandahalfmen.m4.data.Users;
@@ -29,7 +30,30 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button loginButton;
-    private Button cancelButton;
+    private TextView signupLink;
+
+
+    private String fromKey;
+    private String account_type;
+    private int attempts;
+    private String email;
+    private String locked;
+    private String password1;
+    private String username1;
+    private String street_address;
+    private String city;
+    private String state;
+    private String zip_code;
+    private String userAdapter;
+    private Button delete;
+    private Button unban;
+    int counter = 0;
+
+
+    /* database instance */
+    FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabase2 = database2.getReference("users");
+
 
 
     /* database instance */
@@ -40,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -56,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
              */
             public void onClick(View v) {
                 if (username.getText().toString() != "" && password.getText().toString() != "") {
+                    counter = 0;
                     attemptLogin();
                 } else {
                     // If fields are empty, display an error.
@@ -75,17 +100,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        cancelButton = (Button) findViewById(R.id.cancel_button);
+        signupLink = (TextView) findViewById(R.id.link_signup);
 
         /**
          * If cancel button is clicked, goes back to welcome screen.
          */
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View c) {
-                username.setText("");
-                password.setText("");
+        signupLink.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Start the Signup activity
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);
                 finish();
-                onBackPressed();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
     }
@@ -109,49 +137,75 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                // if could not find key in users database
-                if (dataSnapshot.getValue() == null) {
-                    alertMessage("Incorrect Username", "Couldn't find account. Please try again.");
+                Users post = dataSnapshot.getValue(Users.class);
+                account_type = post.account_type.toString();
+                attempts = Integer.valueOf(post.attempts);
+                city = post.city.toString();
+                email = post.email.toString();
+                locked = String.valueOf(post.locked);
+                password1 = post.password.toString();
+                username1 = post.username.toString();
+                userAdapter = post.account_type.toString();
+                street_address = post.street_address.toString();
+                state = post.state.toString();
+                zip_code = String.valueOf(post.zip_code);
+                Log.d("Attempt", String.valueOf(attempts));
+                if (Integer.valueOf(attempts) >= 3) {
+                    alertMessage("Account is Banned", "Too many log in attempts.");
                 } else {
-                    // check password in database and if equal to input, then send to Homepageactivity
-                    Users post = dataSnapshot.getValue(Users.class);
-//                    System.out.println(post);
-                    if (insertPassword.equals(post.password)) {
-                        // login reporting database
-                        LoginReports lr = new LoginReports(true, insertUsername);
-                        mDatabase.child(new Date().toString()).setValue(lr);
-
-                        if (post.account_type.toString().equals("User")) {
-                            Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
-                            i.putExtra("username", insertUsername);
-                            startActivity(i);
-                        }
-
-                        if (post.account_type.toString().equals("Worker")) {
-                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Worker.class);
-                            i.putExtra("username", insertUsername);
-                            startActivity(i);
-                        }
-
-                        if (post.account_type.toString().equals("Manager")) {
-                            Log.d("Sup", "here0");
-
-                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Manager.class);
-                            i.putExtra("username", insertUsername);
-                            startActivity(i);
-                        }
-
-                        if (post.account_type.toString().equals("Admin")) {
-                            Intent i = new Intent(LoginActivity.this, HomePageActivity_Admin.class);
-                            i.putExtra("username", insertUsername);
-                            startActivity(i);
-                        } else {
-                            Log.d("Login Error", "There was a problem with the user type login attempt.");
-                        }
-
-                    // wrong password
+                    // if could not find key in users database
+                    if (dataSnapshot.getValue() == null) {
+                        alertMessage("Incorrect Username", "Couldn't find account. Please try again.");
                     } else {
-                        alertMessage("Incorrect Password", "Couldn't find account. Please try again.");
+                        // check password in database and if equal to input, then send to Homepageactivity
+//                    System.out.println(post);
+                        if (insertPassword.equals(post.password)) {
+                            // login reporting database
+                            LoginReports lr = new LoginReports(true, insertUsername);
+                            mDatabase.child(new Date().toString()).setValue(lr);
+
+                            if (post.account_type.toString().equals("User")) {
+                                Intent i = new Intent(LoginActivity.this, HomePageActivity.class);
+                                i.putExtra("username", insertUsername);
+                                startActivity(i);
+                            }
+
+                            if (post.account_type.toString().equals("Worker")) {
+                                Intent i = new Intent(LoginActivity.this, HomePageActivity_Worker.class);
+                                i.putExtra("username", insertUsername);
+                                startActivity(i);
+                            }
+
+                            if (post.account_type.toString().equals("Manager")) {
+                                Log.d("Sup", "here0");
+
+                                Intent i = new Intent(LoginActivity.this, HomePageActivity_Manager.class);
+                                i.putExtra("username", insertUsername);
+                                startActivity(i);
+                            }
+
+                            if (post.account_type.toString().equals("Admin")) {
+                                Log.d("Sup", "here0");
+                                Intent i = new Intent(LoginActivity.this, HomePageActivity_Admin.class);
+                                i.putExtra("username", insertUsername);
+                                startActivity(i);
+                            } else {
+
+                                Log.d("Login Error", "There was a problem with the user type login attempt.");
+                            }
+
+                            // wrong password
+                        } else {
+                            if (counter < 1) {
+                                int attempts1 = Integer.valueOf(attempts) + 1;
+                                Users user = new Users(username1, password1, account_type,
+                                        email, street_address, city, state,
+                                        Integer.valueOf(zip_code), attempts1, false);
+                                mDatabase2.child(username.getText().toString()).setValue(user);
+                                alertMessage("Incorrect Password", "Couldn't find account. Please try again.");
+                            }
+                            counter = 1;
+                        }
                     }
                 }
             }

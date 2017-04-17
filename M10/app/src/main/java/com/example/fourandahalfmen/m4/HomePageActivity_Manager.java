@@ -76,7 +76,7 @@ public class HomePageActivity_Manager extends Activity {
         logout = (Button) findViewById(R.id.logout_button);
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(HomePageActivity_Manager.this, WelcomeActivity.class);
+                Intent i = new Intent(HomePageActivity_Manager.this, LoginActivity.class);
                 startActivity(i);
             }
         });

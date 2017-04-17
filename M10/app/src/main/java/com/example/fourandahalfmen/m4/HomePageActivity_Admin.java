@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,9 +37,8 @@ public class HomePageActivity_Admin extends Activity {
     private Button logout;
     private Button submitButton;
     private Button save;
-    private Button viewReports;
-    private Button viewWaterAvailability;
-    private Button submitWaterPurity;
+    private Button views_securityLogs;
+    private Button views_all_users;
 
 
     /* database instance */
@@ -52,66 +52,53 @@ public class HomePageActivity_Admin extends Activity {
         setContentView(R.layout.activity_homepage_admin);
         fromUsername = getIntent().getStringExtra("username");
 
-        userSpinner = (Spinner) findViewById(R.id.userSpinner);
+        Log.d("Sup", "here1");
+
+        userSpinner = (Spinner) findViewById(R.id.userSpinnerMan);
         final ArrayAdapter<String> userAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypes);
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(userAdapter);
 
-        password = (EditText) findViewById(R.id.editPasswordHP);
-        email = (EditText) findViewById(R.id.editEmailHP);
-        street_address = (EditText) findViewById(R.id.editStreetHP);
-        city = (EditText) findViewById(R.id.editCityHP);
-        state = (EditText) findViewById(R.id.editStateHP);
-        zip_code = (EditText) findViewById(R.id.editZipHP);
+        password = (EditText) findViewById(R.id.editPasswordMan);
+        email = (EditText) findViewById(R.id.editEmailMan);
+        street_address = (EditText) findViewById(R.id.editStreetMan);
+        city = (EditText) findViewById(R.id.editCityMan);
+        state = (EditText) findViewById(R.id.editStateMan);
+        zip_code = (EditText) findViewById(R.id.editZipMan);
+
+
 
         logout = (Button) findViewById(R.id.logout_button);
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(HomePageActivity_Admin.this, WelcomeActivity.class);
+                Intent i = new Intent(HomePageActivity_Admin.this, LoginActivity.class);
                 startActivity(i);
             }
         });
 
-        submitButton = (Button) findViewById(R.id.submit_a_report);
-        submitButton.setOnClickListener(new View.OnClickListener() {
+
+        views_securityLogs = (Button) findViewById(R.id.views_securityLogs);
+        views_securityLogs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if click on this button, send submitwaterreport activity
-                Intent i = new Intent(HomePageActivity_Admin.this, SubmitWaterReport.class);
+                Intent i = new Intent(HomePageActivity_Admin.this, ListViewSecurityActivity.class);
                 i.putExtra("username", fromUsername);
                 startActivity(i);
             }
         });
 
-        submitWaterPurity = (Button) findViewById(R.id.submit_WaterPurity);
-        submitWaterPurity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // if click on this button, send submitwaterreport activity
-                Intent i = new Intent(HomePageActivity_Admin.this, SubmitWaterReport.class);
-                i.putExtra("username", fromUsername);
-                startActivity(i);
-            }
-        });
 
-        viewReports = (Button) findViewById(R.id.views_all_reports);
-        viewReports.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // if click on this button, send ListViewactivity activity
-                Intent i = new Intent(HomePageActivity_Admin.this, ListViewAvailabilityActivity.class);
-                startActivity(i);
-            }
-        });
-
-        viewWaterAvailability  = (Button) findViewById(R.id.views_WaterAvailability);
-        viewWaterAvailability.setOnClickListener(new View.OnClickListener() {
+        views_all_users  = (Button) findViewById(R.id.views_all_users);
+        views_all_users.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if click on this button, send WaterAvailability activity
-                Intent i = new Intent(HomePageActivity_Admin.this, ViewWaterAvailabilityActivity.class);
+                Intent i = new Intent(HomePageActivity_Admin.this, ListViewUsersActivity.class);
                 startActivity(i);
             }
         });
 
-
         String reflocation = "users/" + fromUsername;
+        Log.d("reflocation", reflocation);
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
             /**
@@ -120,13 +107,14 @@ public class HomePageActivity_Admin extends Activity {
              */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 Users post = dataSnapshot.getValue(Users.class);
-                password.setText(post.password);
-                email.setText(post.email);
+                password.setText(post.password.toString());
+                email.setText(post.email.toString());
                 userAdapter.getPosition(post.account_type.toString());
-                street_address.setText(post.street_address);
-                city.setText(post.city);
-                state.setText(post.state);
+                street_address.setText(post.street_address.toString());
+                city.setText(post.city.toString());
+                state.setText(post.state.toString());
                 zip_code.setText(String.valueOf(post.zip_code));
             }
             /**
@@ -162,6 +150,10 @@ public class HomePageActivity_Admin extends Activity {
             }
         });
     }
+
+
+
+
 
     /**
      * update user and push to firebase

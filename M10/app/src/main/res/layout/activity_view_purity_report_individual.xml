@@ -4,7 +4,7 @@
 
 
     <TextView
-        android:id="@+id/viewLocation"
+        android:id="@+id/city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/viewLong"
+        android:id="@+id/account_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -25,47 +25,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:layout_below="@+id/viewLong"
+        android:layout_below="@+id/account_type"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
 
     <TextView
-        android:id="@+id/viewDate"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/viewLocation"
+        android:layout_below="@+id/city"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/viewWaterType"
+        android:id="@+id/locked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:layout_below="@+id/viewDate"
+        android:layout_below="@+id/email"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="22dp" />
 
     <TextView
-        android:id="@+id/viewWaterCondition"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:layout_below="@+id/viewWaterType"
+        android:layout_below="@+id/locked"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
 
     <TextView
-        android:id="@+id/viewUser"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:layout_below="@+id/viewWaterCondition"
+        android:layout_below="@+id/password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:layout_below="@+id/viewUser"
+        android:layout_below="@+id/username"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
