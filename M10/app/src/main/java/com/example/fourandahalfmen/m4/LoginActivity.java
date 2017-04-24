@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private String fromKey;
     private String account_type;
-    private int attempts;
+    private Long attempts;
     private String email;
     private String locked;
     private String password1;
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private String street_address;
     private String city;
     private String state;
-    private String zip_code;
+    private Long zip_code;
     private String userAdapter;
     private Button delete;
     private Button unban;
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String reflocation = "users/" + insertUsername;
         DatabaseReference ref = database.getReference(reflocation);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             /**
              * get data from firebase based on user-specific id, username and password
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Users post = dataSnapshot.getValue(Users.class);
                 account_type = post.account_type.toString();
-                attempts = Integer.valueOf(post.attempts);
+                attempts = Long.valueOf(post.attempts);
                 city = post.city.toString();
                 email = post.email.toString();
                 locked = String.valueOf(post.locked);
@@ -148,9 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                 userAdapter = post.account_type.toString();
                 street_address = post.street_address.toString();
                 state = post.state.toString();
-                zip_code = String.valueOf(post.zip_code);
-                Log.d("Attempt", String.valueOf(attempts));
-                if (Integer.valueOf(attempts) >= 3) {
+                zip_code = Long.valueOf(post.zip_code);
+                if (Long.valueOf(attempts) >= 3) {
                     alertMessage("Account is Banned", "Too many log in attempts.");
                 } else {
                     // if could not find key in users database
@@ -197,10 +196,10 @@ public class LoginActivity extends AppCompatActivity {
                             // wrong password
                         } else {
                             if (counter < 1) {
-                                int attempts1 = Integer.valueOf(attempts) + 1;
+                                Long attempts1 = Long.valueOf(attempts) + 1;
                                 Users user = new Users(username1, password1, account_type,
                                         email, street_address, city, state,
-                                        Integer.valueOf(zip_code), attempts1, false);
+                                        Long.valueOf(zip_code), Long.valueOf(attempts1), false);
                                 mDatabase2.child(username.getText().toString()).setValue(user);
                                 alertMessage("Incorrect Password", "Couldn't find account. Please try again.");
                             }

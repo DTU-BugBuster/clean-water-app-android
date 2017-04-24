@@ -3,6 +3,7 @@ package com.example.fourandahalfmen.m4;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,10 @@ import java.util.ArrayList;
 
 public class ListViewUsersActivity extends Activity {
 
+    @Override
+    public void recreate() {
+        super.recreate();
+    }
 
     ListView listView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,8 +50,7 @@ public class ListViewUsersActivity extends Activity {
                 android.R.layout.simple_list_item_1, android.R.id.text1, keyval);
 
         listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
+        Log.d("List", keyval.toString());
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

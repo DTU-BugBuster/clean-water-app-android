@@ -47,7 +47,7 @@ public class ViewIndividualSecurityReport extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 securityReport post = dataSnapshot.getValue(securityReport.class);
-                viewLoginTimeStamp.setText(String.valueOf(post.viewLoginTimeStamp));
+                viewLoginTimeStamp.setText(fromKey.toString());
                 success_status.setText(String.valueOf(post.success_status));
                 user.setText(post.user.toString());
             }

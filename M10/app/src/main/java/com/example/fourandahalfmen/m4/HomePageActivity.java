@@ -179,7 +179,7 @@ public class HomePageActivity extends Activity {
         }
 
         Users user = new Users(username, password, account_type, email, street_address, city, state,
-                zip, 0, false);
+                Long.valueOf(zip), Long.valueOf(0), false);
         mDatabase.child(username).setValue(user);
         return true;
     }

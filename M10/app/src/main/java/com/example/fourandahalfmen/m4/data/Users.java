@@ -9,15 +9,15 @@ public final class Users {
     public String street_address;
     public String city;
     public String state;
-    public int zip_code;
-    public int attempts;
+    public Long zip_code;
+    public Long attempts;
     public boolean locked;
 
     /**
      * Constructor with no parameters
      */
     public Users() {
-        this(null, null, null, null, null, null, null, 0, 0, false);
+        this(null, null, null, null, null, null, null, Long.valueOf(0), Long.valueOf(0), false);
     }
 
     /**
@@ -36,7 +36,7 @@ public final class Users {
      */
     public Users(String username, String password, String account_type,
                  String email, String street_address, String city,
-                 String state, int zip_code, int attempts, boolean locked) {
+                 String state, Long zip_code, Long attempts, boolean locked) {
 
         this.username = username;
         this.password = password;

@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class SubmitWaterPurityReport extends AppCompatActivity {
 
-    /* instance variables */
+    /* instance on a null object referencevariables */
     private Spinner waterConditionSpinner;
     private Button submitButton;
     private Button cancelButton;

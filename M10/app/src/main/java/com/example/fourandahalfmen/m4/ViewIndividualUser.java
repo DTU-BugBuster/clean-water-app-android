@@ -67,17 +67,19 @@ public class ViewIndividualUser extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Users post = dataSnapshot.getValue(Users.class);
-                account_type.setText(post.account_type.toString());
-                attempts.setText(String.valueOf(post.attempts));
-                city = post.city.toString();
-                email.setText(post.email.toString());
-                locked.setText(String.valueOf(post.locked));
-                password.setText(post.password.toString());
-                username.setText(post.username.toString());
-                userAdapter = post.account_type.toString();
-                street_address = post.street_address.toString();
-                state = post.state.toString();
-                zip_code = String.valueOf(post.zip_code);
+                if (post != null) {
+                    account_type.setText(post.account_type.toString());
+                    attempts.setText(String.valueOf(post.attempts));
+                    city = post.city.toString();
+                    email.setText(post.email.toString());
+                    locked.setText(String.valueOf(post.locked));
+                    password.setText(post.password.toString());
+                    username.setText(post.username.toString());
+                    userAdapter = post.account_type.toString();
+                    street_address = post.street_address.toString();
+                    state = post.state.toString();
+                    zip_code = String.valueOf(post.zip_code);
+                }
             }
             /**
              * necessary method required for firebase
@@ -102,9 +104,8 @@ public class ViewIndividualUser extends Activity {
                  */
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    dataSnapshot.getRef().removeValue();
-                    Intent i = new Intent(ViewIndividualUser.this, ListViewUsersActivity.class);
-                    startActivity(i);
+                    dataSnapshot.getRef().setValue(null);
+                    onBackPressed();
                 }
                 /**
                  * necessary method required for firebase
@@ -151,7 +152,7 @@ public class ViewIndividualUser extends Activity {
                                  String state, String zip_code) {
 
         Users user = new Users(username, password, account_type, email, street_address, city, state,
-                Integer.valueOf(zip_code), 3, false);
+                Long.valueOf(zip_code), Long.valueOf(0), false);
         mDatabase.child(username).setValue(user);
         return true;
     }

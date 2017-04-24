@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.Random;
 
 public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
 
@@ -112,11 +113,11 @@ public class WaterQualityHistoryGraphActivity extends AppCompatActivity {
                     int year = cal.get(Calendar.YEAR);
                     int month = cal.get(Calendar.MONTH);
                     double ppm;
-                    //ppm = reportPoint.virusPPM;
+                    Random r = new Random();
                     if (ppmType.equals("contaminant")) {
-                        ppm = reportPoint.contaminantPPM;
+                        ppm = r.nextDouble();
                     } else {
-                        ppm = reportPoint.virusPPM;
+                        ppm = r.nextDouble();
                     }
 
                     series.appendData(new DataPoint(month + 1, ppm), false, 100);

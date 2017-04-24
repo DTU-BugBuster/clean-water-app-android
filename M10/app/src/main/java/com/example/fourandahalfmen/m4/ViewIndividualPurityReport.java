@@ -49,7 +49,8 @@ public class ViewIndividualPurityReport extends Activity {
 
 
 
-        String reflocation =  "waterPurityReports/" + fromKey.toString();
+        String reflocation =  "waterPurityReports/" + fromKey;
+        Log.d("Here", reflocation);
         DatabaseReference ref = database.getReference(reflocation);
         ref.addValueEventListener(new ValueEventListener() {
             /**

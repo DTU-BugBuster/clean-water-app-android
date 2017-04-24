@@ -3,6 +3,7 @@ package com.example.fourandahalfmen.m4;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -68,7 +69,7 @@ public class ListViewPurityActivity extends Activity {
 
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
                     WaterReport keyvalue = data.getValue(WaterReport.class);
-                    keyval.add(keyvalue.location.toString());
+                    keyval.add(keyvalue.location);
                 }
 
 //                values = keyval.toArray(new String[keyval.size()]);
